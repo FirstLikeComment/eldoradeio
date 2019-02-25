@@ -6,5 +6,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Rooms.RoomsActivity">
-
+    <TextView
+            android:text="@string/room_filter_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/roomFilterTypeText"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="28dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"/>
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/roomFilterTypeSpinner"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/roomFilterTypeText"
+            app:layout_constraintBottom_toBottomOf="@+id/roomFilterTypeText" android:spinnerMode="dropdown"
+    />
+    <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/roomFilterChoiceSpinner"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toEndOf="@+id/roomFilterChoiceText"
+            android:layout_marginLeft="24dp" android:layout_marginStart="24dp"
+            app:layout_constraintBottom_toBottomOf="@+id/roomFilterChoiceText"/>
+    <TextView
+            android:text="@string/room_filter_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/roomFilterChoiceText" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/roomFilterTypeText"
+            app:layout_constraintStart_toStartOf="@+id/roomFilterTypeText"
+    />
+    <TextView
+            android:text="@string/room_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/roomListText" android:layout_marginTop="96dp"
+            app:layout_constraintTop_toBottomOf="@+id/roomFilterChoiceText"
+            app:layout_constraintStart_toStartOf="@+id/roomFilterChoiceText"
+    />
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/roomListText"
+            app:layout_constraintStart_toStartOf="@+id/roomListText"
+            android:layout_marginTop="8dp"/>
 </android.support.constraint.ConstraintLayout>

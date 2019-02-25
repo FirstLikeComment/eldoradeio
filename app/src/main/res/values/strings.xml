@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">eldoradeio</string>
+    <string name="room_filter_type">Filter by:</string>
+    <string name="room_filter_choice">Filter:</string>
+    <string name="room_list">Rooms:</string>
+    <string name="room_item_room_name">Room name</string>
+    <string name="room_item_book">Book</string>
 </resources>
