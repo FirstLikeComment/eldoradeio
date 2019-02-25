@@ -1,3 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eldoradeio</string>
+    <string name="username">Username</string>
+    <string name="content_logo">Eloradeio logo</string>
+    <string name="password">Password</string>
+    <string name="text_login">Welcome young bream, please sign in !</string>
 </resources>
