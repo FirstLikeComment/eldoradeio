@@ -9,17 +9,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ScheduleActivity">
+        <activity android:name=".Rooms.ScheduleActivity">
         </activity>
-        <activity android:name=".BookingActivity">
+        <activity android:name=".Rooms.BookingActivity">
         </activity>
-        <activity android:name=".RoomsActivity">
+        <activity android:name=".Rooms.RoomsActivity">
         </activity>
-        <activity android:name=".GroupActivity">
+        <activity android:name=".Profile.GroupActivity">
         </activity>
-        <activity android:name=".FavoriteActivity">
+        <activity android:name=".Profile.FavoriteActivity">
         </activity>
-        <activity android:name=".ProfilActivity">
+        <activity android:name=".Profile.ProfileActivity">
         </activity>
         <activity android:name=".Authentification.HomeActivity">
         </activity>
