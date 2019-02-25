@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "869285614107",
+    "firebase_url": "https://eldoradeio-e2bfc.firebaseio.com",
+    "project_id": "eldoradeio-e2bfc",
+    "storage_bucket": "eldoradeio-e2bfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869285614107:android:99089eff3f748e8d",
+        "android_client_info": {
+          "package_name": "fr.ISEN.eldoradeio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "869285614107-n4uhphqjlm1qt3k1c268kchesp3jvota.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.ISEN.eldoradeio",
+            "certificate_hash": "5aeb6741fbe85a4e43de9437116e040ac7df9c69"
+          }
+        },
+        {
+          "client_id": "869285614107-q0aghhgqj4d9g7a42l18lv020lr2q298.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgEYUpKVIuSowybjBJa1LQvBV5yp8k7c4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "869285614107-q0aghhgqj4d9g7a42l18lv020lr2q298.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
