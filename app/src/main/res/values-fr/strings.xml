@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eldoradeio</string>
+    <string name="username">Identifiant</string>
+    <string name="content_logo">Logo eloradeio</string>
+    <string name="password">Mot de passe</string>
+    <string name="text_login">Bienvenue jeune dorade, connecte toi stp !</string>
+    <string name="textBLogin">CONNEXION</string>
+</resources>
