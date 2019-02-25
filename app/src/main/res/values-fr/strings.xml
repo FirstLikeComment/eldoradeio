@@ -5,4 +5,5 @@
     <string name="content_logo">Logo eloradeio</string>
     <string name="password">Mot de passe</string>
     <string name="text_login">Bienvenue jeune dorade, connecte toi stp !</string>
+    <string name="textBLogin">CONNEXION</string>
 </resources>
