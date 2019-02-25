@@ -1,7 +1,8 @@
-package fr.ISEN.eldoradeio
+package fr.ISEN.eldoradeio.Rooms
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import fr.ISEN.eldoradeio.R
 
 class BookingActivity : AppCompatActivity() {
 

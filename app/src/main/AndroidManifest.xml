@@ -9,11 +9,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".ScheduleActivity">
+        <activity android:name=".Rooms.ScheduleActivity">
         </activity>
-        <activity android:name=".BookingActivity">
+        <activity android:name=".Rooms.BookingActivity">
         </activity>
-        <activity android:name=".RoomsActivity">
+        <activity android:name=".Rooms.RoomsActivity">
         </activity>
         <activity android:name=".GroupActivity">
         </activity>
