@@ -62,5 +62,6 @@ class HomeActivity : AppCompatActivity() {
     public fun deconnexion()
     {
         FirebaseAuth.getInstance().signOut()
+        afficheLogin()
     }
 }
