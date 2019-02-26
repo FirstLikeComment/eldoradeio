@@ -40,22 +40,26 @@ class LoginActivity : AppCompatActivity() {
 
     public fun signIn()
     {
-        auth.signInWithEmailAndPassword(emailField.text.toString(), pwdField.text.toString())
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Toast.makeText(baseContext, "Sign in success",Toast.LENGTH_SHORT).show()
-                    Log.d("SignIn", "signInWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("SignIn", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Sign in failed. You might not be registered.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
+        if (emailField != null && pwdField != null) {
+            auth.signInWithEmailAndPassword(emailField.text.toString(), pwdField.text.toString())
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Toast.makeText(baseContext, "Sign in success", Toast.LENGTH_SHORT).show()
+                        Log.d("SignIn", "signInWithEmail:success")
+                        val user = auth.currentUser
+                        updateUI(user)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("SignIn", "signInWithEmail:failure", task.exception)
+                        Toast.makeText(
+                            baseContext, "Sign in failed. You might not be registered.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        updateUI(null)
+                    }
                 }
-            }
+        }
     }
 
     public fun updateUI(currentUser: FirebaseUser?)
