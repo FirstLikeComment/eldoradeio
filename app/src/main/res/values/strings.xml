@@ -5,4 +5,5 @@
     <string name="room_list">Rooms:</string>
     <string name="room_item_room_name">Room name</string>
     <string name="room_item_book">Book</string>
+    <string name="room_filter_floor">Floor</string>
 </resources>
