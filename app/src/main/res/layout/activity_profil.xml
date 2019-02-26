@@ -7,23 +7,15 @@
         android:layout_height="match_parent"
         tools:context=".Profile.ProfileActivity">
 
-    <EditText
-            android:hint="Nom:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:id="@+id/name" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" tools:srcCompat="@mipmap/logodorade"
             android:id="@+id/profil_picture"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/name" android:visibility="visible"/>
+            android:layout_marginRight="8dp"
+            android:visibility="visible" app:layout_constraintTop_toBottomOf="@+id/change_image"
+            android:layout_marginTop="8dp"/>
     <ImageView
             android:layout_width="35dp"
             android:layout_height="32dp" app:srcCompat="@android:drawable/checkbox_on_background"
@@ -40,7 +32,7 @@
             android:id="@+id/save" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.498" android:layout_marginTop="8dp"
+            app:layout_constraintHorizontal_bias="0.498" android:layout_marginTop="24dp"
             app:layout_constraintTop_toBottomOf="@+id/update_successful"/>
     <ImageButton
             android:layout_width="wrap_content"
@@ -48,6 +40,22 @@
             android:id="@+id/change_image"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" android:layout_marginTop="28dp" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="0.058"/>
+            android:layout_marginRight="8dp"
+            app:layout_constraintHorizontal_bias="0.058" android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@+id/name_layout"/>
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp" android:id="@+id/name_layout">
+
+        <android.support.design.widget.TextInputEditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name:"/>
+    </android.support.design.widget.TextInputLayout>
 </android.support.constraint.ConstraintLayout>
