@@ -19,12 +19,14 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
 
+        name.hint="Nom: "+user?.email.toString()
         changeTitre()
-        profil_picture.setOnClickListener {
+        change_image.setOnClickListener {
             selectImage()
             }
 
-        name.setOnClickListener {
+        save.setOnClickListener {
+           // update_processing.visibility = View.GONE
             changeNom()
         }
     }
@@ -47,8 +49,9 @@ class ProfileActivity : AppCompatActivity() {
 
     public fun changeTitre()
     {
+        //update_processing.visibility = View.VISIBLE
         user?.let{
-            name.setText("Nom: "+user.email.toString())
+            name.hint="Nom: "+user.email.toString()
         }
     }
 
