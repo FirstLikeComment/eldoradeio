@@ -7,4 +7,9 @@
     <string name="text_login">Bienvenue jeune dorade, connecte toi stp !</string>
     <string name="textBLogin">CONNEXION</string>
     <string name="textBRegister">INSCRIPTION</string>
+    <string name="text_register">Tu veux rejoindre le réseau des dorades ? Remplis ce formulaire !</string>
+    <string name="username_register">Email</string>
+    <string name="last_name_register">Nom</string>
+    <string name="first_name_register">Prénom</string>
+    <string name="dob_register">Date de naissance</string>
 </resources>

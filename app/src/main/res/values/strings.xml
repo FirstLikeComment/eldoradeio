@@ -7,4 +7,9 @@
     <string name="text_login">Welcome young bream, please sign in !</string>
     <string name="textBLogin">LOGIN</string>
     <string name="textBRegister">SIGN UP</string>
+    <string name="text_register">You want to the bream network ? Fill in this form !</string>
+    <string name="username_register">Email</string>
+    <string name="last_name_register">Last name</string>
+    <string name="first_name_register">First name</string>
+    <string name="dob_register">D.O.B</string>
 </resources>

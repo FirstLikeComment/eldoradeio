@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
             signIn()
         }
         bRegister.setOnClickListener {
-            redirectToHome()
+            redirectToRegister()
         }
     }
 
@@ -67,6 +67,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun redirectToHome() {
         val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun redirectToRegister() {
+        val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
         startActivity(intent)
     }
 }
