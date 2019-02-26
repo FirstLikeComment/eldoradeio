@@ -8,7 +8,7 @@
         tools:context=".Profile.ProfileActivity">
 
     <EditText
-            android:hint="Nom:"
+            android:hint="Name:"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"

@@ -1,4 +1,4 @@
-package fr.ISEN.eldoradeio.Authentification
+package fr.ISEN.eldoradeio.authentification
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity

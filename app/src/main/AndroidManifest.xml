@@ -21,11 +21,11 @@
         </activity>
         <activity android:name=".Profile.ProfileActivity">
         </activity>
-        <activity android:name=".Authentification.HomeActivity">
+        <activity android:name=".authentification.HomeActivity">
         </activity>
-        <activity android:name=".Authentification.RegisterActivity">
+        <activity android:name=".authentification.RegisterActivity">
         </activity>
-        <activity android:name=".Authentification.LoginActivity">
+        <activity android:name=".authentification.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

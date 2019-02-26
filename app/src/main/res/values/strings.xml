@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eldoradeio</string>
-    <string name="username">Username</string>
+    <string name="username">Email</string>
     <string name="content_logo">Eloradeio logo</string>
     <string name="password">Password</string>
     <string name="text_login">Welcome young bream, please sign in !</string>
-    <string name="textBLogin">LOGIN</string>
+    <string name="textBLogin">SIGN IN</string>
     <string name="textBRegister">SIGN UP</string>
     <string name="text_register">You want to the bream network ? Fill in this form !</string>
-    <string name="username_register">Email</string>
     <string name="last_name_register">Last name</string>
     <string name="first_name_register">First name</string>
     <string name="dob_register">D.O.B</string>
+    <string name="year_text_register">"Year: "</string>
+    <string-array name="years_array">
+        <item>N1</item>
+        <item>N2</item>
+        <item>N3</item>
+        <item>M1</item>
+        <item>M2</item>
+    </string-array>
+    <string name="toast_spinner_register">Clicked:</string>
+    <string name="date_format">%04d-%02d-%02d</string>
 </resources>
