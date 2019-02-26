@@ -6,4 +6,5 @@
     <string name="password">Password</string>
     <string name="text_login">Welcome young bream, please sign in !</string>
     <string name="textBLogin">LOGIN</string>
+    <string name="textBRegister">SIGN UP</string>
 </resources>
