@@ -7,4 +7,5 @@
     <string name="room_item_room_name">Nom de salle</string>
     <string name="room_item_book">Réserver</string>
     <string name="room_filter_floor">Étage</string>
+    <string name="toast_room_list_changed">Liste des salles récupérée</string>
 </resources>

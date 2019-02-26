@@ -8,6 +8,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -39,6 +40,8 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private val roomList = arrayListOf<Room>()
     private val selectedRoomList = arrayListOf<Room>()
     private val roomListAdapter = RoomAdapter(selectedRoomList, this)
+    private var currentFloor: Int? = null
+    private var floorList = arrayListOf<String>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,11 +57,10 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             adapter = filterTypeAdapter
             setSelection(0, false)
             onItemSelectedListener = this@RoomsActivity
-            prompt = getString(R.string.room_filter_type)
             gravity = Gravity.CENTER
         }
 
-        val filterChoiceAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOf("1","2","3","4","5"))
+        val filterChoiceAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, floorList)
         filterChoiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         with(roomFilterChoiceSpinner)
         {
@@ -82,12 +84,8 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             R.id.roomFilterChoiceSpinner ->
             {
                 val selectedFloor = (parent.getItemAtPosition(position) as String).toInt()
-                selectedRoomList.clear()
-                for(room: Room in roomList)
-                {
-                    if (room.roomFloor == selectedFloor) selectedRoomList.add(room)
-                }
-                roomListAdapter.notifyDataSetChanged()
+                currentFloor = selectedFloor
+                selectRoomsinFloor(selectedFloor)
             }
         }
 
@@ -97,9 +95,21 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         // Do nothing
     }
 
+    private fun selectRoomsinFloor(selectedFloor: Int?) {
+        if (selectedFloor != null)
+        {
+            selectedRoomList.clear()
+            for (room: Room in roomList) {
+                if (room.roomFloor == selectedFloor) selectedRoomList.add(room)
+            }
+            roomListAdapter.notifyDataSetChanged()
+        }
+    }
+
     private val itemListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             updateRoomList(dataSnapshot)
+            Toast.makeText(this@RoomsActivity,getString(R.string.toast_room_list_changed),Toast.LENGTH_SHORT).show()
         }
         override fun onCancelled(databaseError: DatabaseError) {
             Log.w(TAG, "loadItem:onCancelled", databaseError.toException())
@@ -108,6 +118,8 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     private fun updateRoomList(dataSnapshot: DataSnapshot) {
         roomList.clear()
+        floorList.clear()
+
         val items = dataSnapshot.children.iterator()
         if (items.hasNext()) {
 
@@ -118,9 +130,24 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 //get current data in a map
                 val map = currentItem.value as HashMap<String, Any>
                 val room = Room(map["roomName"] as String, (map["roomFloor"] as Long).toInt(), (map["availability"] as Long).toInt(), map["uuid"] as String)
+                if (!floorList.contains(room.roomFloor.toString()))
+                {
+                    floorList.add(room.roomFloor.toString())
+                }
                 roomList.add(room)
             }
+            floorList.sort()
+            val filterChoiceAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, floorList)
+            filterChoiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            with(roomFilterChoiceSpinner)
+            {
+                adapter = filterChoiceAdapter
+                setSelection(-1,false)
+                onItemSelectedListener = this@RoomsActivity
+                gravity = Gravity.CENTER
+            }
         }
+        selectRoomsinFloor(currentFloor)
 
     }
 }
