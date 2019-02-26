@@ -24,7 +24,8 @@ class ProfileActivity : AppCompatActivity() {
             selectImage()
             }
 
-        name.setOnClickListener {
+        save.setOnClickListener {
+           // update_processing.visibility = View.GONE
             changeNom()
         }
     }
@@ -47,6 +48,7 @@ class ProfileActivity : AppCompatActivity() {
 
     public fun changeTitre()
     {
+        //update_processing.visibility = View.VISIBLE
         user?.let{
             name.setText("Nom: "+user.email.toString())
         }
