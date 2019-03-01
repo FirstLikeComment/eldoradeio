@@ -90,7 +90,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/dob")
         mCommentReference
-            .setValue(dobFieldUpdate.text.toString()) { firebaseError, firebase ->
+            .setValue(dob.text.toString()) { firebaseError, firebase ->
             }
 
     }
