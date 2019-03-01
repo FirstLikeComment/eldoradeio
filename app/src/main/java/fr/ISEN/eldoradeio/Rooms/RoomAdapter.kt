@@ -1,11 +1,13 @@
 package fr.ISEN.eldoradeio.Rooms
 
 import android.content.Context
+import android.content.Intent
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import fr.ISEN.eldoradeio.R
@@ -45,6 +47,11 @@ class RoomAdapter (private val items : ArrayList<RoomsActivity.Room>, val contex
                     R.color.colorRoomUnavailable))
             }
         }
+        holder.bookingButton.setOnClickListener {
+            val bookingIntent = Intent(context, BookingActivity::class.java)
+            bookingIntent.putExtra("roomID",items[position].uuid)
+            context.startActivity(bookingIntent)
+        }
     }
 
 
@@ -54,4 +61,5 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     // Holds the TextViews and the imageView that constitute a random user
     val roomName: TextView = view.roomItemRoomNameText
     val roomStatus: ImageView = view.roomItemStatus
+    val bookingButton: Button = view.rommItemBookButton
 }
