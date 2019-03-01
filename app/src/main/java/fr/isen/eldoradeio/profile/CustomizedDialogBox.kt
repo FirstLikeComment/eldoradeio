@@ -3,6 +3,7 @@ package fr.isen.eldoradeio.profile
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
@@ -18,6 +19,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 {
     //lateinit var firstName: TextInputLayout
     //lateinit var lastName: TextInputLayout
+    lateinit var dob: TextInputEditText
     private var spinnerItem: String = ""
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -37,6 +39,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
             handleSpinner()
            // firstName = dialogView.findViewById(R.id.firstname)
             //lastName = dialogView.findViewById(R.id.lastname)
+            dob = dialogView.findViewById(R.id.dobFieldUpdate)
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
@@ -121,7 +124,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
     }
     private fun selectDate(){
 
-        dobFieldUpdate.setOnFocusChangeListener {view, hasFocus->
+        dob.setOnFocusChangeListener {view, hasFocus->
             if (hasFocus) {
                 view.clearFocus()
                 activity?.let {
@@ -129,7 +132,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
                         DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                             val dateSave: String =
                                 String.format(getString(R.string.date_format), year, monthOfYear + 1, dayOfMonth)
-                            dobFieldUpdate.setText(dateSave)
+                            dob.setText(dateSave)
                         }, 1997, 0, 1
                     )
                     dpd.show()
