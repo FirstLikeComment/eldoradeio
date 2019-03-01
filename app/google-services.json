@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "869285614107-4p1010c129inq9bpoonnbiu1fdgp7eoh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.ISEN.eldoradeio",
+            "certificate_hash": "f8636e5e7dd225c3bb536c2ad547851a77699d42"
+          }
+        },
+        {
           "client_id": "869285614107-q0aghhgqj4d9g7a42l18lv020lr2q298.apps.googleusercontent.com",
           "client_type": 3
         }

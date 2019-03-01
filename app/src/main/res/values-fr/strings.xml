@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eldoradeio</string>
+    <string name="username">Email</string>
+    <string name="content_logo">Logo eloradeio</string>
+    <string name="password">Mot de passe</string>
+    <string name="text_login">Bienvenue jeune dorade, connecte toi stp !</string>
+    <string name="textBLogin">CONNEXION</string>
+    <string name="textBRegister">INSCRIPTION</string>
+    <string name="text_register">Tu veux rejoindre le réseau des dorades ? Remplis ce formulaire !</string>
+    <string name="last_name_register">Nom</string>
+    <string name="first_name_register">Prénom</string>
+    <string name="dob_register">Date de naissance</string>
+    <string name="year_text_register">"Année : "</string>
+    <string name="toast_spinner_register">"Cliqué : "</string>
+    <string name="date_format">%04d-%02d-%02d</string>
+    <string name="room_filter_type">Filtrer par :</string>
+    <string name="room_filter_choice">Filtre :</string>
+    <string name="room_list">Salles :</string>
+    <string name="room_item_room_name">Nom de salle</string>
+    <string name="room_item_book">Réserver</string>
+    <string name="room_filter_floor">Étage</string>
+    <string name="toast_room_list_changed">Liste des salles récupérée</string>
+</resources>
