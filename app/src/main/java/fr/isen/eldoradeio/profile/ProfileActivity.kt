@@ -15,7 +15,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
 
-        firstname.hint="Nom: "+user?.email.toString()
+        firstnameProfile.setText("Nom: "+user?.email.toString())
         changeTitre()
         change_image.setOnClickListener {
             selectImage()
@@ -49,7 +49,7 @@ class ProfileActivity : AppCompatActivity() {
     {
         //update_processing.visibility = View.VISIBLE
         user?.let{
-            firstname.hint=getString(R.string.firstname_update)+": "+user.email.toString()
+            firstnameProfile.setText(getString(R.string.firstname_update)+": "+user.email.toString())
         }
     }
 }
