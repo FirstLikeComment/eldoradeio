@@ -19,7 +19,7 @@
     <string name="first_name_register">First name</string>
     <string name="dob_register">D.O.B</string>
     <string name="year_text_register">"Year: "</string>
-    <string name="name_field">Name</string>
+    <string name="firstname_update">Firstname</string>
     <string name="lastname_update">Lastname</string>
     <string-array name="years_array">
         <item>N1</item>

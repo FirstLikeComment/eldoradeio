@@ -1,28 +1,45 @@
 package fr.isen.eldoradeio.profile
 
+import android.app.DatePickerDialog
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
-import android.util.Log
-import android.widget.EditText
-import android.widget.Toast
+import android.view.Gravity
+import android.view.View
+import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
-import kotlinx.android.synthetic.main.dialog_update.*
+import kotlinx.android.synthetic.main.activity_register.*
 
-class CustomizedDialogBox : DialogFragment()
+class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 {
-    lateinit var userName: EditText
+    lateinit var firstName: EditText
     lateinit var lastName: EditText
+    lateinit var dob: EditText
+    lateinit var year: TextView
+    private var spinnerItem: String = ""
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        // ...
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        if (parent != null) {
+            spinnerItem = parent.getItemAtPosition(position) as String
+        }
+    }
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_update, null)
-            userName = dialogView.findViewById(R.id.username)
+            selectDate()
+            handleSpinner()
+            firstName = dialogView.findViewById(R.id.firstname)
             lastName = dialogView.findViewById(R.id.lastname)
+            dob = dialogView.findViewById(R.id.dobFieldRegister)
+            year = dialogView.findViewById(R.id.yearFieldRegister)
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
@@ -30,8 +47,9 @@ class CustomizedDialogBox : DialogFragment()
                 // Add action buttons
                 .setPositiveButton("MODIFIER"
                 ) { dialog, id ->
-                    changeNom()
-                    changeLastNom()
+
+                    UpdateProfil()
+
                 }
                 .setNegativeButton("NON"
                 ) { dialog, id ->
@@ -48,7 +66,7 @@ class CustomizedDialogBox : DialogFragment()
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/firstName")
         mCommentReference
-            .setValue(userName.text.toString()) { firebaseError, firebase ->
+            .setValue(firstName.text.toString()) { firebaseError, firebase ->
             }
 
     }
@@ -63,6 +81,73 @@ class CustomizedDialogBox : DialogFragment()
             .setValue(lastName.text.toString()) { firebaseError, firebase ->
             }
 
+    }
+
+    public fun changeDob()
+    {
+        val mDatabase = FirebaseDatabase.getInstance()
+        val mAuth = FirebaseAuth.getInstance()
+        val userId = mAuth.currentUser!!.uid
+        val mCommentReference = mDatabase.getReference("users/"+userId+"/dob")
+        mCommentReference
+            .setValue(dob.text.toString()) { firebaseError, firebase ->
+            }
+
+    }
+
+    public fun changeYear()
+    {
+        val mDatabase = FirebaseDatabase.getInstance()
+        val mAuth = FirebaseAuth.getInstance()
+        val userId = mAuth.currentUser!!.uid
+        val mCommentReference = mDatabase.getReference("users/"+userId+"/year")
+        mCommentReference
+            .setValue(year.text.toString()) { firebaseError, firebase ->
+            }
+
+    }
+
+    private fun handleSpinner(){
+        val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_update, null)
+        val spinner: Spinner = dialogView.findViewById(R.id.year_spinner)
+        ArrayAdapter.createFromResource(
+            activity,
+            R.array.years_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+            spinner.setSelection(0, false)
+            spinner.gravity = Gravity.CENTER
+        }
+        spinner.onItemSelectedListener = this
+    }
+    private fun selectDate(){
+
+        dobFieldRegister.setOnFocusChangeListener {view, hasFocus->
+            if (hasFocus) {
+                view.clearFocus()
+                activity?.let {
+                    val dpd = DatePickerDialog(it,
+                        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                            val dateSave: String =
+                                String.format(getString(R.string.date_format), year, monthOfYear + 1, dayOfMonth)
+                            dobFieldRegister.setText(dateSave)
+                        }, 1997, 0, 1
+                    )
+                    dpd.show()
+                }
+            }
+        }
+    }
+
+
+    public fun UpdateProfil()
+    {
+        changeNom()
+        changeLastNom()
+        changeDob()
+        changeYear()
     }
 
 
