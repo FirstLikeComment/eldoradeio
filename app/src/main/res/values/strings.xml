@@ -19,6 +19,8 @@
     <string name="first_name_register">First name</string>
     <string name="dob_register">D.O.B</string>
     <string name="year_text_register">"Year: "</string>
+    <string name="name_field">Name</string>
+    <string name="lastname_update">Lastname</string>
     <string-array name="years_array">
         <item>N1</item>
         <item>N2</item>
@@ -28,4 +30,5 @@
     </string-array>
     <string name="toast_spinner_register">Clicked:</string>
     <string name="date_format">%04d-%02d-%02d</string>
+
 </resources>

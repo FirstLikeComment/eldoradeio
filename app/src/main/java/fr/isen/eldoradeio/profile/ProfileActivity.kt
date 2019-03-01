@@ -3,11 +3,9 @@ package fr.isen.eldoradeio.profile
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.activity_profil.*
-
 
 private  var PICK_IMAGE = 1
 class ProfileActivity : AppCompatActivity() {
@@ -21,11 +19,13 @@ class ProfileActivity : AppCompatActivity() {
         changeTitre()
         change_image.setOnClickListener {
             selectImage()
-            }
+        }
 
         save.setOnClickListener {
-           // update_processing.visibility = View.GONE
-            changeNom()
+            // update_processing.visibility = View.GONE
+            //changeNom()
+            CustomizedDialogBox().show(supportFragmentManager, "missiles")
+
         }
     }
 
@@ -49,18 +49,7 @@ class ProfileActivity : AppCompatActivity() {
     {
         //update_processing.visibility = View.VISIBLE
         user?.let{
-            name.hint="Nom: "+user.email.toString()
+            name.hint=getString(R.string.name_field)+": "+user.email.toString()
         }
-    }
-
-    public fun changeNom()
-    {
-        user?.updateEmail(name.text.toString())
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    update_successful.visibility= View.VISIBLE
-                }
-            }
-
     }
 }
