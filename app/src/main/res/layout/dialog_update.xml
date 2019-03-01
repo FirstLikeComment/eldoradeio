@@ -31,8 +31,23 @@
             android:layout_marginBottom="16dp"
             android:fontFamily="sans-serif"
             android:hint="@string/lastname_update"/>
+
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/dobFieldLayoutUpdate"
+            app:layout_constraintTop_toBottomOf="@+id/lastname"
+            app:layout_constraintStart_toStartOf="@+id/lastname" android:layout_marginLeft="128dp"
+            android:layout_marginStart="128dp" app:layout_constraintEnd_toEndOf="@+id/lastname"
+            android:layout_marginEnd="128dp" android:layout_marginRight="128dp">
+
+        <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dob_register" android:id="@+id/dobFieldUpdate"/>
+    </android.support.design.widget.TextInputLayout>
     <TextView
-            android:id="@+id/year"
+            android:id="@+id/yearFieldUpdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -44,26 +59,13 @@
     <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/year_spinner" app:layout_constraintStart_toEndOf="@+id/yearFieldRegister"
+            android:id="@+id/year_spinner_update" app:layout_constraintStart_toEndOf="@+id/yearFieldUpdate"
             android:layout_marginLeft="16dp" android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="156dp" android:layout_marginRight="156dp"
             app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/dobFieldLayoutRegister" android:spinnerMode="dropdown"
+            app:layout_constraintTop_toBottomOf="@+id/dobFieldLayoutUpdate" android:spinnerMode="dropdown"
     />
 
-    <android.support.design.widget.TextInputLayout
-            android:layout_width="155dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/dobFieldLayoutRegister"
-            app:layout_constraintTop_toBottomOf="@+id/firstNameFieldLayoutRegister"
-            app:layout_constraintStart_toStartOf="@+id/firstNameFieldLayoutRegister" android:layout_marginLeft="128dp"
-            android:layout_marginStart="128dp" app:layout_constraintEnd_toEndOf="@+id/firstNameFieldLayoutRegister"
-            android:layout_marginEnd="128dp" android:layout_marginRight="128dp">
 
-        <android.support.design.widget.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/dob_register" android:id="@+id/dobFieldRegister"/>
-    </android.support.design.widget.TextInputLayout>
 
 </LinearLayout>

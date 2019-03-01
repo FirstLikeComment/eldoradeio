@@ -3,6 +3,7 @@ package fr.isen.eldoradeio.profile
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.view.Gravity
@@ -11,14 +12,12 @@ import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.dialog_update.*
 
 class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 {
     lateinit var firstName: EditText
     lateinit var lastName: EditText
-    lateinit var dob: EditText
-    lateinit var year: TextView
     private var spinnerItem: String = ""
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -38,8 +37,6 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
             handleSpinner()
             firstName = dialogView.findViewById(R.id.firstname)
             lastName = dialogView.findViewById(R.id.lastname)
-            dob = dialogView.findViewById(R.id.dobFieldRegister)
-            year = dialogView.findViewById(R.id.yearFieldRegister)
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
@@ -90,7 +87,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/dob")
         mCommentReference
-            .setValue(dob.text.toString()) { firebaseError, firebase ->
+            .setValue(dobFieldUpdate.text.toString()) { firebaseError, firebase ->
             }
 
     }
@@ -102,7 +99,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/year")
         mCommentReference
-            .setValue(year.text.toString()) { firebaseError, firebase ->
+            .setValue(yearFieldUpdate.text.toString()) { firebaseError, firebase ->
             }
 
     }
@@ -124,7 +121,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
     }
     private fun selectDate(){
 
-        dobFieldRegister.setOnFocusChangeListener {view, hasFocus->
+        dobFieldUpdate.setOnFocusChangeListener {view, hasFocus->
             if (hasFocus) {
                 view.clearFocus()
                 activity?.let {
@@ -132,7 +129,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
                         DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                             val dateSave: String =
                                 String.format(getString(R.string.date_format), year, monthOfYear + 1, dayOfMonth)
-                            dobFieldRegister.setText(dateSave)
+                            dobFieldUpdate.setText(dateSave)
                         }, 1997, 0, 1
                     )
                     dpd.show()
