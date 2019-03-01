@@ -34,5 +34,6 @@
     <string name="booking_date">Choose the date:</string>
     <string name="booking_availability_status">Availability status: %1$s</string>
     <string name="booking_book">Book this room</string>
+    <string name="profile_favorite">Favorite rooms</string>
 
 </resources>
