@@ -35,7 +35,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
             val builder = AlertDialog.Builder(it)
             val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_update, null)
             selectDate()
-            //handleSpinner()
+            handleSpinner()
             firstName = dialogView.findViewById(R.id.firstname)
             lastName = dialogView.findViewById(R.id.lastname)
             dob = dialogView.findViewById(R.id.dobFieldRegister)
@@ -107,7 +107,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 
     }
 
-   /* private fun handleSpinner(){
+    private fun handleSpinner(){
         val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_update, null)
         val spinner: Spinner = dialogView.findViewById(R.id.year_spinner)
         ArrayAdapter.createFromResource(
@@ -121,7 +121,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
             spinner.gravity = Gravity.CENTER
         }
         spinner.onItemSelectedListener = this
-    }*/
+    }
     private fun selectDate(){
 
         dobFieldRegister.setOnFocusChangeListener {view, hasFocus->
