@@ -27,6 +27,11 @@ class ProfileActivity : AppCompatActivity() {
             CustomizedDialogBox().show(supportFragmentManager, "missiles")
 
         }
+
+        profileFavoriteButton.setOnClickListener {
+            val favoriteIntent = Intent(this@ProfileActivity,FavoriteActivity::class.java)
+            startActivity(favoriteIntent)
+        }
     }
 
 
