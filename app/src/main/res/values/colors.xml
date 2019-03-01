@@ -3,4 +3,7 @@
     <color name="colorPrimary">#0B3D92</color>
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#0B3D92</color>
+    <color name="colorRoomAvailable">#00FF00</color>
+    <color name="colorRoomPartiallyAvailable">#FFFF00</color>
+    <color name="colorRoomUnavailable">#FF0000</color>
 </resources>

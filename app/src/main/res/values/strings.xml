@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eldoradeio</string>
+    <string name="room_filter_type">Filter by:</string>
+    <string name="room_filter_choice">Filter:</string>
+    <string name="room_list">Rooms:</string>
+    <string name="room_item_room_name">Room name</string>
+    <string name="room_item_book">Book</string>
+    <string name="room_filter_floor">Floor</string>
+    <string name="toast_room_list_changed">Room list fetched</string>
     <string name="username">Email</string>
     <string name="content_logo">Eloradeio logo</string>
     <string name="password">Password</string>
