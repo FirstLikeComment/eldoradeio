@@ -7,4 +7,46 @@
         android:layout_height="match_parent"
         tools:context=".rooms.BookingActivity">
 
+    <CalendarView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bookingCalendarView" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+            android:text="@string/booking_room_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bookingRoomHeaderText" android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+            android:text="@string/booking_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bookingDateText"
+            app:layout_constraintBottom_toTopOf="@+id/bookingCalendarView"
+            app:layout_constraintStart_toStartOf="@+id/bookingCalendarView"
+    />
+    <TextView
+            android:text="@string/booking_availability_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bookingAvailabilityStatusText"
+            app:layout_constraintStart_toStartOf="@+id/bookingCalendarView"
+            app:layout_constraintTop_toBottomOf="@+id/bookingCalendarView"/>
+    <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp" app:srcCompat="@android:color/darker_gray"
+            android:id="@+id/bookingAvailabilityStatusImageView"
+            app:layout_constraintEnd_toEndOf="@+id/bookingCalendarView"
+            app:layout_constraintTop_toBottomOf="@+id/bookingCalendarView"/>
+    <Button
+            android:text="@string/booking_book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/bookingButton" android:layout_marginTop="44dp"
+            app:layout_constraintTop_toBottomOf="@+id/bookingCalendarView" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent"/>
 </android.support.constraint.ConstraintLayout>

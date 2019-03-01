@@ -23,4 +23,8 @@
     <string name="toast_room_list_changed">Liste des salles récupérée</string>
     <string name="firstname_update">Prénom</string>
     <string name="lastname_update">Nom</string>
+    <string name="booking_room_header">Réservation pour la salle %1$s</string>
+    <string name="booking_date">Choisir la date :</string>
+    <string name="booking_availability_status">Statut de disponibilité: %1$s</string>
+    <string name="booking_book">Réserver cette salle</string>
 </resources>
