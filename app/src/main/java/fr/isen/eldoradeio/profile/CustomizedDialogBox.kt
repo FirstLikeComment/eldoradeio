@@ -17,10 +17,11 @@ import kotlinx.android.synthetic.main.dialog_update.*
 
 class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 {
-    //lateinit var firstName: TextInputLayout
-    //lateinit var lastName: TextInputLayout
+    lateinit var firstName: TextInputEditText
+    lateinit var lastName: TextInputEditText
     lateinit var dob: TextInputEditText
-    private var spinnerItem: String = ""
+    lateinit var spinner: Spinner
+    lateinit var spinnerItem: String
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         // ...
@@ -35,9 +36,10 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_update, null)
-           // firstName = dialogView.findViewById(R.id.firstname)
-            //lastName = dialogView.findViewById(R.id.lastname)
+            firstName = dialogView.findViewById(R.id.firstnameUpdate)
+            lastName = dialogView.findViewById(R.id.lastnameUpdate)
             dob = dialogView.findViewById(R.id.dobFieldUpdate)
+            spinner = dialogView.findViewById(R.id.year_spinner_update)
             selectDate()
             handleSpinner(dialogView)
 
@@ -102,7 +104,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/year")
         mCommentReference
-            .setValue(yearFieldUpdate.text.toString()) { firebaseError, firebase ->
+            .setValue(spinnerItem) { firebaseError, firebase ->
             }
 
     }
