@@ -33,9 +33,9 @@
             android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:id="@+id/dobFieldLayoutUpdate"
-            app:layout_constraintTop_toBottomOf="@+id/lastname"
-            app:layout_constraintStart_toStartOf="@+id/lastname" android:layout_marginLeft="128dp"
-            android:layout_marginStart="128dp" app:layout_constraintEnd_toEndOf="@+id/lastname"
+            app:layout_constraintTop_toBottomOf="@+id/lastnameLayoutUpdate"
+            app:layout_constraintStart_toStartOf="@+id/lastnameLayoutUpdate" android:layout_marginLeft="128dp"
+            android:layout_marginStart="128dp" app:layout_constraintEnd_toEndOf="@+id/lastnameLayoutUpdate"
             android:layout_marginEnd="128dp" android:layout_marginRight="128dp">
 
         <android.support.design.widget.TextInputEditText
