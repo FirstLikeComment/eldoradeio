@@ -35,11 +35,11 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_update, null)
-            selectDate()
-            handleSpinner()
            // firstName = dialogView.findViewById(R.id.firstname)
             //lastName = dialogView.findViewById(R.id.lastname)
             dob = dialogView.findViewById(R.id.dobFieldUpdate)
+            selectDate()
+            handleSpinner()
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
