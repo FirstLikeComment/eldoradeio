@@ -108,7 +108,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
     }
 
     private fun handleSpinner(dialogView:View){
-        val spinner: Spinner = dialogView.findViewById(R.id.year_spinner)
+        val spinner: Spinner = dialogView.findViewById(R.id.year_spinner_update)
         ArrayAdapter.createFromResource(
             activity,
             R.array.years_array,
