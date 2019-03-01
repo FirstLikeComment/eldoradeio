@@ -1,4 +1,4 @@
-package fr.ISEN.eldoradeio.authentification
+package fr.ISEN.eldoradeio.Authentification
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -23,7 +23,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     private var spinnerItem: String = ""
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
-        // ...
+        //
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
