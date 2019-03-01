@@ -39,7 +39,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
             //lastName = dialogView.findViewById(R.id.lastname)
             dob = dialogView.findViewById(R.id.dobFieldUpdate)
             selectDate()
-            handleSpinner()
+            handleSpinner(dialogView)
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
@@ -107,8 +107,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 
     }
 
-    private fun handleSpinner(){
-        val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_update, null)
+    private fun handleSpinner(dialogView:View){
         val spinner: Spinner = dialogView.findViewById(R.id.year_spinner)
         ArrayAdapter.createFromResource(
             activity,
