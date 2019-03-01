@@ -60,6 +60,10 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
         }
+        else {
+            Toast.makeText(baseContext, "Please fill all fields.", Toast.LENGTH_SHORT).show()
+            Log.w("SignIn", "signInWithEmail:empty")
+        }
     }
 
     public fun updateUI(currentUser: FirebaseUser?)
