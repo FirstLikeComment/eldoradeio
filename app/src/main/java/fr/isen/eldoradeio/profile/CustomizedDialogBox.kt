@@ -68,7 +68,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/firstName")
         mCommentReference
-            .setValue(firstnameUpdate.text.toString()) { firebaseError, firebase ->
+            .setValue(firstName.text.toString()) { firebaseError, firebase ->
             }
 
     }
@@ -80,7 +80,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/lastName")
         mCommentReference
-            .setValue(lastnameUpdate.text.toString()) { firebaseError, firebase ->
+            .setValue(lastName.text.toString()) { firebaseError, firebase ->
             }
 
     }
