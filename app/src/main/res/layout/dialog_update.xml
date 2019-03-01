@@ -10,28 +10,25 @@
             android:scaleType="center"
             android:background="#FFFFBB33"
             android:contentDescription="@string/app_name"/>
-    <EditText
-            android:id="@+id/firstname"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="4dp"
-            android:hint="@string/firstname_update" />
-    <EditText
-            android:id="@+id/lastname"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="sans-serif"
-            android:hint="@string/lastname_update"/>
 
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/firstnameLayoutUpdate">
+
+        <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/firstname_update" android:id="@+id/firstnameUpdate"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:id="@+id/lastnameLayoutUpdate">
+
+        <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lastname_update" android:id="@+id/lastnameUpdate"/>
+    </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
             android:layout_width="155dp"
             android:layout_height="wrap_content"

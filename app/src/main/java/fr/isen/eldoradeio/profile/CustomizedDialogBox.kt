@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.dialog_update.*
 
 class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 {
-    lateinit var firstName: EditText
-    lateinit var lastName: EditText
+    //lateinit var firstName: TextInputLayout
+    //lateinit var lastName: TextInputLayout
     private var spinnerItem: String = ""
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -35,8 +35,8 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
             val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_update, null)
             selectDate()
             handleSpinner()
-            firstName = dialogView.findViewById(R.id.firstname)
-            lastName = dialogView.findViewById(R.id.lastname)
+           // firstName = dialogView.findViewById(R.id.firstname)
+            //lastName = dialogView.findViewById(R.id.lastname)
 
             // Inflate and set the layout for the dialog
             // Pass null as the parent view because its going in the dialog layout
@@ -63,7 +63,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/firstName")
         mCommentReference
-            .setValue(firstName.text.toString()) { firebaseError, firebase ->
+            .setValue(firstnameUpdate.text.toString()) { firebaseError, firebase ->
             }
 
     }
@@ -75,7 +75,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/lastName")
         mCommentReference
-            .setValue(lastName.text.toString()) { firebaseError, firebase ->
+            .setValue(lastnameUpdate.text.toString()) { firebaseError, firebase ->
             }
 
     }
