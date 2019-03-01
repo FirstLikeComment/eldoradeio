@@ -1,13 +1,13 @@
-package fr.ISEN.eldoradeio.Profile
+package fr.isen.eldoradeio.rooms
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import fr.ISEN.eldoradeio.R
+import fr.isen.eldoradeio.R
 
-class GroupActivity : AppCompatActivity() {
+class ScheduleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_group)
+        setContentView(R.layout.activity_schedule)
     }
 }

@@ -1,4 +1,4 @@
-package fr.ISEN.eldoradeio
+package fr.isen.eldoradeio
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

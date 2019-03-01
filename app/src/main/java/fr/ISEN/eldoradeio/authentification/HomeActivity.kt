@@ -1,12 +1,12 @@
-package fr.ISEN.eldoradeio.Authentification
+package fr.isen.eldoradeio.authentification
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
-import fr.ISEN.eldoradeio.Profile.ProfileActivity
-import fr.ISEN.eldoradeio.R
-import fr.ISEN.eldoradeio.Rooms.RoomsActivity
+import fr.isen.eldoradeio.profile.ProfileActivity
+import fr.isen.eldoradeio.R
+import fr.isen.eldoradeio.rooms.RoomsActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {

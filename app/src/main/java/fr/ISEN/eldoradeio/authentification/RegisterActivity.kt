@@ -1,4 +1,4 @@
-package fr.ISEN.eldoradeio.authentification
+package fr.isen.eldoradeio.authentification
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -7,8 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import fr.ISEN.eldoradeio.Authentification.HomeActivity
-import fr.ISEN.eldoradeio.R
+import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 

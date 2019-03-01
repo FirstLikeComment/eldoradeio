@@ -1,9 +1,9 @@
-package fr.ISEN.eldoradeio
+package fr.isen.eldoradeio
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import fr.ISEN.eldoradeio.Profile.ProfileActivity
+import fr.isen.eldoradeio.profile.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
 

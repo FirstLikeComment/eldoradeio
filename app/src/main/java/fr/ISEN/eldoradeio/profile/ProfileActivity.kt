@@ -1,13 +1,11 @@
-package fr.ISEN.eldoradeio.Profile
+package fr.isen.eldoradeio.profile
 
 import android.content.Intent
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
-import fr.ISEN.eldoradeio.R
+import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.activity_profil.*
 
 

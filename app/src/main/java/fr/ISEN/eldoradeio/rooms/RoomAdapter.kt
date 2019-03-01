@@ -1,4 +1,4 @@
-package fr.ISEN.eldoradeio.Rooms
+package fr.isen.eldoradeio.rooms
 
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import fr.ISEN.eldoradeio.R
+import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.room_item_row.view.*
 
 class RoomAdapter (private val items : ArrayList<RoomsActivity.Room>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {

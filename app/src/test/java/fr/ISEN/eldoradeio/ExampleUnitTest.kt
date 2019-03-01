@@ -1,4 +1,4 @@
-package fr.ISEN.eldoradeio
+package fr.isen.eldoradeio
 
 import org.junit.Test
 

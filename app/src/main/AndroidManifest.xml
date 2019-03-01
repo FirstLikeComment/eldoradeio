@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="fr.ISEN.eldoradeio">
+          package="fr.isen.eldoradeio">
 
     <application
             android:allowBackup="true"
@@ -9,23 +9,23 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Rooms.ScheduleActivity">
+        <activity android:name=".rooms.ScheduleActivity">
         </activity>
-        <activity android:name=".Rooms.BookingActivity">
+        <activity android:name=".rooms.BookingActivity">
         </activity>
-        <activity android:name=".Rooms.RoomsActivity">
+        <activity android:name=".rooms.RoomsActivity">
         </activity>
-        <activity android:name=".Profile.GroupActivity">
+        <activity android:name=".profile.GroupActivity">
         </activity>
-        <activity android:name=".Profile.FavoriteActivity">
+        <activity android:name=".profile.FavoriteActivity">
         </activity>
-        <activity android:name=".Profile.ProfileActivity">
+        <activity android:name=".profile.ProfileActivity">
         </activity>
-        <activity android:name=".Authentification.HomeActivity">
+        <activity android:name=".authentification.HomeActivity">
         </activity>
-        <activity android:name=".Authentification.RegisterActivity">
+        <activity android:name=".authentification.RegisterActivity">
         </activity>
-        <activity android:name=".Authentification.LoginActivity">
+        <activity android:name=".authentification.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
