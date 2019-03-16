@@ -23,4 +23,7 @@
     <string name="toast_room_list_changed">Liste des salles récupérée</string>
     <string name="firstname_update">Prénom</string>
     <string name="lastname_update">Nom</string>
+    <string name="welcome_home">"Bienvenue au réseau des dorades, "</string>
+    <string name="hey_you_bream">Eh toi, sournoise dorade, choisis ta promo !</string>
+    <string name="profile_picture">Ta meilleure photo de dorade !</string>
 </resources>
