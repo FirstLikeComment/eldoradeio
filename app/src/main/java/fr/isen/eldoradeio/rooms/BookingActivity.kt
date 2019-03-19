@@ -4,7 +4,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import fr.isen.eldoradeio.Room
 import com.google.firebase.database.*
 import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.activity_booking.*
@@ -14,12 +14,6 @@ class BookingActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "BookingActivity"
     }
-
-    data class Room(
-        val roomName: String = "",
-        val roomFloor: Int,
-        val availability: Int = RoomsActivity.ROOM_FULLY_AVAILABLE,
-        var uuid: String = "")
 
     private var selectedRoomID = ""
 

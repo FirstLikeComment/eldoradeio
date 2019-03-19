@@ -6,4 +6,7 @@
     <color name="colorRoomAvailable">#00FF00</color>
     <color name="colorRoomPartiallyAvailable">#FFFF00</color>
     <color name="colorRoomUnavailable">#FF0000</color>
+    <color name="colorFavoriteDisabled">#666666</color>
+    <color name="colorFavoriteEnabled">#FB8C00</color>
+
 </resources>
