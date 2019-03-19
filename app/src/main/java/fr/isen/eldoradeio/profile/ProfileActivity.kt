@@ -4,6 +4,9 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.activity_profil.*
 
@@ -15,7 +18,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
 
-        firstnameProfile.setText("Nom: "+user?.email.toString())
+
         changeTitre()
         change_image.setOnClickListener {
             selectImage()
@@ -25,6 +28,7 @@ class ProfileActivity : AppCompatActivity() {
             // update_processing.visibility = View.GONE
             //changeNom()
             CustomizedDialogBox().show(supportFragmentManager, "missiles")
+            changeTitre()
 
         }
 
@@ -53,8 +57,12 @@ class ProfileActivity : AppCompatActivity() {
     public fun changeTitre()
     {
         //update_processing.visibility = View.VISIBLE
-        user?.let{
-            firstnameProfile.setText(getString(R.string.firstname_update)+": "+user.email.toString())
-        }
+
+        val mDatabase = FirebaseDatabase.getInstance()
+        val mAuth = FirebaseAuth.getInstance()
+        val userId = mAuth.currentUser!!.uid
+        val mCommentReference = mDatabase.getReference("users/"+userId+"/firstName")
+        firstnameProfile.setText("Nom: "+mCommentReference.toString())
     }
+
 }
