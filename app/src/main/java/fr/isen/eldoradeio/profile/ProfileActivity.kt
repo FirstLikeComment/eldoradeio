@@ -38,6 +38,11 @@ class ProfileActivity : AppCompatActivity() {
             val favoriteIntent = Intent(this@ProfileActivity,FavoriteActivity::class.java)
             startActivity(favoriteIntent)
         }
+
+        profileGroupsButton.setOnClickListener {
+            val groupIntent = Intent (this@ProfileActivity,GroupActivity::class.java)
+            startActivity(groupIntent)
+        }
     }
 
 

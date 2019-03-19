@@ -36,5 +36,12 @@
     <string name="booking_book">Book this room</string>
     <string name="profile_favorite">Favorite rooms</string>
     <string name="favorite_add_room">Add a room</string>
+    <string name="group_you_belong_to">You belong to the following groups:</string>
+    <string name="group_text">Groups:</string>
+    <string name="group_add_group">Add group</string>
+    <string name="group_create_group">Create a group</string>
+    <string name="profile_group">Groups</string>
+    <string name="group_item_group_name">Group name</string>
+    <string name="group_item_remove">Remove</string>
 
 </resources>
