@@ -101,7 +101,7 @@ class ProfileActivity : AppCompatActivity() {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 val value = dataSnapshot.getValue(String::class.java)
-                firstnameProfile.setText("Nom: "+value.toString())
+                lastnameProfile.setText("Nom: "+value.toString())
             }
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
