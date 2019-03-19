@@ -26,4 +26,6 @@
     <string name="welcome_home">"Bienvenue au réseau des dorades, "</string>
     <string name="hey_you_bream">Eh toi, sournoise dorade, choisis ta promo !</string>
     <string name="profile_picture">Ta meilleure photo de dorade !</string>
+    <string name="err_perm_select_image">Nous avons besoin de votre permissions pour accéder à votre galerie !</string>
+    <string name="err_perm_camera">Nous avons besoin de votre permission pour accéder à votre appareil photo !</string>
 </resources>

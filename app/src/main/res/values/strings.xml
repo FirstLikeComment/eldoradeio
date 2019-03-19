@@ -33,5 +33,7 @@
     <string name="welcome_home">"Welcome to the bream network, "</string>
     <string name="hey_you_bream">Hey you, sneaky bream, select your year !</string>
     <string name="profile_picture">Your best bream\'s shot !</string>
+    <string name="err_perm_select_image">We need your authorization to access your gallery!</string>
+    <string name="err_perm_camera">We need your authorization to access your camera!</string>
 
 </resources>
