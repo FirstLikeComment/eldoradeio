@@ -1,9 +1,20 @@
 package fr.isen.eldoradeio.authentification
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.util.Log
 import android.view.Gravity
@@ -12,15 +23,28 @@ import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import fr.isen.eldoradeio.R
+import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.activity_register.*
+import java.io.ByteArrayOutputStream
+import java.sql.Timestamp
 
 class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     lateinit var auth: FirebaseAuth
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mUserReference = mDatabase.getReference("users")
+
+    private val mStorage = FirebaseStorage.getInstance()
+    private val mPictureReference = mStorage.reference
+
+    private var filePath: Uri? = null
+
     private var spinnerItem: String = ""
+
+    val REQUEST_SELECT_IMAGE_IN_ALBUM = 10
+    val REQUEST_TAKE_PHOTO = 20
 
 
 
@@ -54,6 +78,9 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         bRegister.setOnClickListener {
             createAccount()
         }
+        circularProfilePict.setOnClickListener {
+            alertDialogCamera()
+        }
     }
 
     data class User(
@@ -76,7 +103,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             auth.createUserWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
+                        // Register success, update UI with the signed-in user's information
                         Toast.makeText(baseContext, "Sign up success", Toast.LENGTH_SHORT).show()
                         val user = auth.currentUser
                         val userId = user!!.uid
@@ -92,8 +119,9 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                         mUserReference.child(userId).setValue(userToAdd)
 
                         updateUI(user)
+                        uploadPicture()
                     } else {
-                        // If sign in fails, display a message to the user.
+                        // If register fails, display a message to the user.
                         Log.w("Authentification", "createUserWithEmail:failure", task.exception)
                         Toast.makeText(baseContext, "Registration failed.", Toast.LENGTH_SHORT).show()
                         updateUI(null)
@@ -127,6 +155,139 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             redirectToHome()
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM && data != null && data.data != null) {
+                data.let {
+                    filePath = it.data
+                    if (filePath != null) {
+                        val stream = contentResolver.openInputStream(filePath!!)
+                        val bitmap = BitmapFactory.decodeStream(stream)
+                        circularProfilePict.setImageBitmap(bitmap)
+                    }
+                }
+            }
+        }
+        if (requestCode == REQUEST_TAKE_PHOTO && data != null && data.data != null) {
+            data.let {
+                filePath = it.data
+                val imageBitmap = data.extras?.get("data") as Bitmap
+                circularProfilePicture.setImageBitmap(imageBitmap)
+            }
+        }
+    }
+
+    private fun requestPermission(perm: String, requestCode: Int, handler: () -> Unit) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                perm
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            //Permission is not granted
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    perm)) {
+            }
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(perm),
+                requestCode
+            )
+            Toast.makeText(this@RegisterActivity, "Permission accepted. Thanks!", Toast.LENGTH_SHORT).show()
+        } else {
+            //Permission is granted
+            handler()
+            Toast.makeText(this@RegisterActivity, "Permissions have already been accepted!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                selectImageInAlbum()
+                Log.d("HomeActivity:","WRITE_EXTERNAL_STORAGE permission granted")
+                Toast.makeText(this@RegisterActivity, "WRITE_EXTERNAL_STORAGE permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, getString(R.string.err_perm_select_image), Toast.LENGTH_LONG).show()
+            }
+            return //just to exit if statements
+        }
+        if (requestCode == REQUEST_TAKE_PHOTO) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                takePhoto()
+                Log.d("HomeActivity:","CAMERA permission granted")
+                Toast.makeText(this@RegisterActivity, "CAMERA permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, getString(R.string.err_perm_camera), Toast.LENGTH_LONG).show()
+            }
+            return
+        }
+
+    }
+
+    private fun uploadPicture(){
+        filePath.let {
+            //amélioration: progressBar
+            val pictureRef = mPictureReference.child(auth.currentUser!!.uid + "/profilePicture")
+            // Get the data from an ImageView as bytes
+            val bitmap = (circularProfilePict.drawable as BitmapDrawable).bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+
+            val uploadTask = pictureRef.putBytes(data)
+            uploadTask.addOnFailureListener {
+                // Handle unsuccessful uploads
+                Toast.makeText(this@RegisterActivity, "Failed upload", Toast.LENGTH_SHORT).show()
+            }.addOnSuccessListener {
+                // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                Toast.makeText(this@RegisterActivity, "Upload successful", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
+    private fun selectImageInAlbum() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivityForResult(intent, REQUEST_SELECT_IMAGE_IN_ALBUM)
+        }
+    }
+
+    private fun takePhoto() {
+
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(packageManager)?.also {
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
+            }
+        }
+    }
+
+    private fun alertDialogCamera(){
+        val builder = AlertDialog.Builder(this@RegisterActivity)
+        builder.setTitle("Choose your new face.")
+        builder.setPositiveButton("CHOOSE FROM GALLERY"){_,_ ->
+            requestPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_SELECT_IMAGE_IN_ALBUM) {
+                selectImageInAlbum()
+            }
+        }
+        builder.setNegativeButton("TAKE PHOTO"){_,_ ->
+            requestPermission(android.Manifest.permission.CAMERA, REQUEST_TAKE_PHOTO) {
+                takePhoto()
+            }
+        }
+        builder.setNeutralButton("CANCEL"){_,_ ->
+            Toast.makeText(this@RegisterActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+        }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
 
     private fun selectDate() {
 

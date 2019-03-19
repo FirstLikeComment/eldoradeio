@@ -24,7 +24,6 @@ import java.util.jar.Manifest
 
 class HomeActivity : AppCompatActivity() {
 
-    val REQUEST_CODE = 1
     val REQUEST_SELECT_IMAGE_IN_ALBUM = 10
     val REQUEST_TAKE_PHOTO = 20
     val user = FirebaseAuth.getInstance().currentUser
@@ -48,6 +47,7 @@ class HomeActivity : AppCompatActivity() {
         deconnexion.setOnClickListener {
             deconnexion()
         }
+
         circularProfilePicture.setOnClickListener {
             alertDialogCamera()
         }
