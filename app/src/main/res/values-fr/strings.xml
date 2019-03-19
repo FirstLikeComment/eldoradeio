@@ -28,4 +28,5 @@
     <string name="booking_availability_status">Statut de disponibilité: %1$s</string>
     <string name="booking_book">Réserver cette salle</string>
     <string name="profile_favorite">Salles favorites</string>
+    <string name="favorite_add_room">Ajouter une salle</string>
 </resources>

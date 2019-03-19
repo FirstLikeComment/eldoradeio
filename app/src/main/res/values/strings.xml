@@ -35,5 +35,6 @@
     <string name="booking_availability_status">Availability status: %1$s</string>
     <string name="booking_book">Book this room</string>
     <string name="profile_favorite">Favorite rooms</string>
+    <string name="favorite_add_room">Add a room</string>
 
 </resources>
