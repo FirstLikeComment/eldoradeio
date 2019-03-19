@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.Group
 import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.group_item_row.view.*
@@ -29,7 +31,18 @@ class GroupAdapter (private val items : ArrayList<Group>, val context: Context) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.groupName.text = items[position].name
+        holder.groupName.text = items[position].groupName
+        holder.removeButton.setOnClickListener {
+            removeUserFromGroup(items[position])
+        }
+    }
+
+    fun removeUserFromGroup(group: Group)
+    {
+        val user = FirebaseAuth.getInstance().currentUser
+        val mDatabase = FirebaseDatabase.getInstance()
+        val mGroupReference = mDatabase.getReference("groups").child(group.uuid)
+        mGroupReference.child("users").child(user!!.uid).removeValue()
     }
 
 }

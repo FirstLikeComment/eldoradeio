@@ -12,7 +12,7 @@ data class Room(
 )
 
 data class Group(
-    val name: String = "",
+    val groupName: String = "",
     val users: ArrayList<String>,
     var uuid: String = ""
 )

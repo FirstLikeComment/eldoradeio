@@ -27,7 +27,7 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         const val TAG = "RoomsActivity"
     }
 
-    val user = FirebaseAuth.getInstance().currentUser
+    private val user = FirebaseAuth.getInstance().currentUser
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mFavoriteReference = mDatabase.getReference("users").child(user!!.uid).child("favorites")
     private val mRoomReference = mDatabase.getReference("rooms")
