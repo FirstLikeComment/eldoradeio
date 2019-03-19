@@ -3,8 +3,10 @@ package fr.isen.eldoradeio.profile
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import fr.isen.eldoradeio.R
@@ -62,7 +64,23 @@ class ProfileActivity : AppCompatActivity() {
         val mAuth = FirebaseAuth.getInstance()
         val userId = mAuth.currentUser!!.uid
         val mCommentReference = mDatabase.getReference("users/"+userId+"/firstName")
-        firstnameProfile.setText("Nom: "+mCommentReference.toString())
+
+        // Read from the database
+        mCommentReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val value = dataSnapshot.getValue(String::class.java)
+                firstnameProfile.setText("Nom: "+value.toString())
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w("ProfileActivity", "Failed to read value.", error.toException())
+            }
+
+        })
     }
+
+
 
 }
