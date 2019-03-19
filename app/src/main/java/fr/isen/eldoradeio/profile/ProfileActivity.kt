@@ -21,7 +21,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profil)
 
 
-        changeTitre()
+        PrintAll()
         change_image.setOnClickListener {
             selectImage()
         }
@@ -30,7 +30,7 @@ class ProfileActivity : AppCompatActivity() {
             // update_processing.visibility = View.GONE
             //changeNom()
             CustomizedDialogBox().show(supportFragmentManager, "missiles")
-            changeTitre()
+            PrintAll()
 
         }
 
@@ -56,7 +56,7 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    public fun changeTitre()
+    public fun PrintFirstName()
     {
         //update_processing.visibility = View.VISIBLE
 
@@ -79,6 +79,86 @@ class ProfileActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    public fun PrintLastName()
+    {
+        //update_processing.visibility = View.VISIBLE
+
+        val mDatabase = FirebaseDatabase.getInstance()
+        val mAuth = FirebaseAuth.getInstance()
+        val userId = mAuth.currentUser!!.uid
+        val mCommentReference = mDatabase.getReference("users/"+userId+"/lastName")
+
+        // Read from the database
+        mCommentReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val value = dataSnapshot.getValue(String::class.java)
+                firstnameProfile.setText("Nom: "+value.toString())
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w("ProfileActivity", "Failed to read value.", error.toException())
+            }
+
+        })
+    }
+    public fun PrintDob()
+    {
+        //update_processing.visibility = View.VISIBLE
+
+        val mDatabase = FirebaseDatabase.getInstance()
+        val mAuth = FirebaseAuth.getInstance()
+        val userId = mAuth.currentUser!!.uid
+        val mCommentReference = mDatabase.getReference("users/"+userId+"/dob")
+
+        // Read from the database
+        mCommentReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val value = dataSnapshot.getValue(String::class.java)
+                dobProfile.setText("D.O.B: "+value.toString())
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w("ProfileActivity", "Failed to read value.", error.toException())
+            }
+
+        })
+    }
+    public fun PrintYear()
+    {
+        //update_processing.visibility = View.VISIBLE
+
+        val mDatabase = FirebaseDatabase.getInstance()
+        val mAuth = FirebaseAuth.getInstance()
+        val userId = mAuth.currentUser!!.uid
+        val mCommentReference = mDatabase.getReference("users/"+userId+"/year")
+
+        // Read from the database
+        mCommentReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                val value = dataSnapshot.getValue(String::class.java)
+                yearProfile.setText("Year: "+value.toString())
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w("ProfileActivity", "Failed to read value.", error.toException())
+            }
+
+        })
+    }
+    public fun PrintAll()
+    {
+        PrintFirstName()
+        PrintLastName()
+        PrintDob()
+        PrintYear()
     }
 
 
