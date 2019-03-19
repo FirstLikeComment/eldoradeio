@@ -145,10 +145,17 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 
     public fun UpdateProfil()
     {
-        changeNom()
-        changeLastNom()
-        changeDob()
-        changeYear()
+        try//if(firstName.text !=null && lastName.text !=null &&dob.text !=null && spinner !=null )
+        {
+            changeNom()
+            changeLastNom()
+            changeDob()
+            changeYear()
+        }
+        catch (e:Exception)
+        {
+            Toast.makeText(activity, "null field", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
