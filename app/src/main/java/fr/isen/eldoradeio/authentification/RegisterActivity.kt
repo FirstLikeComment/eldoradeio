@@ -33,11 +33,8 @@ import java.sql.Timestamp
 class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     lateinit var auth: FirebaseAuth
-    private val mDatabase = FirebaseDatabase.getInstance()
-    private val mUserReference = mDatabase.getReference("users")
-
-    private val mStorage = FirebaseStorage.getInstance()
-    private val mPictureReference = mStorage.reference
+    lateinit var mDatabase: FirebaseDatabase
+    lateinit var mStorage:FirebaseStorage
 
     private var filePath: Uri? = null
 
@@ -73,6 +70,8 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         handleSpinner()
 
         auth = FirebaseAuth.getInstance()
+        mDatabase = FirebaseDatabase.getInstance()
+        mStorage= FirebaseStorage.getInstance()
         selectDate()
 
         bRegister.setOnClickListener {
@@ -93,6 +92,9 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     )
 
     public fun createAccount() {
+
+        val mUserReference = mDatabase.getReference("users")
+
         val pwd: String = pwdFieldRegister.text.toString()
         val email: String = emailFieldRegister.text.toString()
         val firstname: String = firstNameFieldRegister.text.toString()
@@ -171,17 +173,6 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                 }
             }
         }
-        /*if (requestCode == REQUEST_TAKE_PHOTO && data != null && data.data != null) {
-            data.let {
-                filePath = it.data
-                val imageBitmap = data.extras?.get("data") as Bitmap
-                filePath = Uri.parse(MediaStore.Images.Media.insertImage(contentResolver, imageBitmap, "Title", null))
-                Toast.makeText(this, "$filePath", Toast.LENGTH_LONG).show()
-                circularProfilePicture.setImageBitmap(imageBitmap)
-            }
-        } else {
-            Toast.makeText(this, "$filePath", Toast.LENGTH_LONG).show()
-        }*/
         if (requestCode == REQUEST_TAKE_PHOTO && data != null && data.extras != null) {
             val imageBitmap = data.extras?.get("data") as Bitmap
             filePath = Uri.parse(MediaStore.Images.Media.insertImage(contentResolver, imageBitmap, "Title", null))
@@ -242,6 +233,9 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     }
 
     private fun uploadPicture(){
+
+        val mPictureReference = mStorage.reference
+
         filePath.let {
             //amélioration: progressBar
             val pictureRef = mPictureReference.child(auth.currentUser!!.uid + "/profilePicture")
@@ -259,7 +253,6 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                 // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
                 Toast.makeText(this@RegisterActivity, "Upload successful", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
