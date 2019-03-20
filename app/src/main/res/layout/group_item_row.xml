@@ -5,41 +5,22 @@
                                              android:layout_width="match_parent"
                                              android:layout_height="wrap_content" android:id="@+id/roomItemLayout">
     <TextView
-            android:text="@string/room_item_room_name"
+            android:text="@string/group_item_group_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/groupItemGroupNameText" android:layout_marginTop="16dp"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="16dp" android:layout_marginStart="16dp" android:textSize="20sp"
     />
-    <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp" app:srcCompat="@android:color/holo_green_light"
-            android:id="@+id/roomItemStatus"
-            app:layout_constraintEnd_toStartOf="@+id/groupItemRemoveButton" android:layout_marginEnd="64dp"
-            android:layout_marginRight="64dp" android:layout_marginTop="4dp"
-            app:layout_constraintTop_toTopOf="@+id/groupItemGroupNameText"
-            app:layout_constraintBottom_toBottomOf="@+id/groupItemGroupNameText"
-            app:layout_constraintVertical_bias="1.0"/>
-    <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp" app:srcCompat="@color/colorFavoriteDisabled"
-            android:id="@+id/roomItemFavourite"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintTop_toTopOf="@+id/groupItemRemoveButton"
-            app:layout_constraintBottom_toBottomOf="@+id/groupItemRemoveButton"/>
     <Button
-            android:text="@string/room_item_book"
+            android:text="@string/group_item_leave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/groupItemRemoveButton"
-            android:layout_marginTop="4dp"
-            app:layout_constraintTop_toTopOf="@+id/roomItemStatus"
-            app:layout_constraintBottom_toBottomOf="@+id/roomItemStatus"
-            app:layout_constraintVertical_bias="0.629"
-            app:layout_constraintEnd_toStartOf="@+id/roomItemFavourite" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"/>
+            app:layout_constraintTop_toTopOf="@+id/groupItemGroupNameText"
+            app:layout_constraintBottom_toBottomOf="@+id/groupItemGroupNameText"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" android:layout_marginRight="16dp"/>
     <View
             android:id="@+id/divider"
             android:layout_width="0dp"

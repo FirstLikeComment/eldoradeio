@@ -28,4 +28,17 @@
     <string name="profile_picture">Ta meilleure photo de dorade !</string>
     <string name="err_perm_select_image">Nous avons besoin de votre permissions pour accéder à votre galerie !</string>
     <string name="err_perm_camera">Nous avons besoin de votre permission pour accéder à votre appareil photo !</string>
+    <string name="booking_room_header">Réservation pour la salle %1$s</string>
+    <string name="booking_date">Choisir la date :</string>
+    <string name="booking_availability_status">Statut de disponibilité: %1$s</string>
+    <string name="booking_book">Réserver cette salle</string>
+    <string name="profile_favorite">Salles favorites</string>
+    <string name="favorite_add_room">Ajouter une salle</string>
+    <string name="group_you_belong_to">Vous appartenez aux groupes suivant :</string>
+    <string name="group_text">Groupes :</string>
+    <string name="group_join_group">Rejoindre un groupe</string>
+    <string name="group_create_group">Créer un groupe</string>
+    <string name="profile_group">Groupes</string>
+    <string name="group_item_group_name">Nom du groupe</string>
+    <string name="group_item_leave">Quitter</string>
 </resources>
