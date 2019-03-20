@@ -1,7 +1,7 @@
 package fr.isen.eldoradeio.rooms
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,8 +15,9 @@ class ScheduleActivity : AppCompatActivity() {
     companion object {
         const val TAG = "ScheduleActivity"
     }
+
     private var listBooking: ArrayList<Reservation> = ArrayList()
-    private val adapter = ScheduleAdapter(this,listBooking)
+    private val adapter = ScheduleAdapter(this, listBooking)
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mBookingReference = mDatabase.getReference("booking")
     private var roomID = ""
@@ -29,13 +30,12 @@ class ScheduleActivity : AppCompatActivity() {
         bookingDate = intent.getStringExtra("bookingDate")
         commentListView.adapter = adapter
 
-        nv_creneau.setOnClickListener{
+        nv_creneau.setOnClickListener {
             addToSchedule()
         }
     }
 
-    private fun getBookingsFromFirebase()
-    {
+    private fun getBookingsFromFirebase() {
         mBookingReference.orderByKey().addValueEventListener(bookingListener)
     }
 
@@ -44,6 +44,7 @@ class ScheduleActivity : AppCompatActivity() {
             // Get Post object and use the values to update the UI
             addDataToList(dataSnapshot)
         }
+
         override fun onCancelled(databaseError: DatabaseError) {
             // Getting Item failed, log a message
             Log.w(TAG, "loadBooking:onCancelled", databaseError.toException())
@@ -63,15 +64,15 @@ class ScheduleActivity : AppCompatActivity() {
                 //get current data in a map
                 val map = currentItem.value as HashMap<String, Any>
                 //key will return Firebase ID
-                if(
-                    currentItem.hasChild("userUid")&&
-                    currentItem.hasChild("beginning")&&
-                    currentItem.hasChild("end")&&
-                    currentItem.hasChild("roomUid")&&
-                    currentItem.hasChild("description")&&
-                    currentItem.hasChild("bookingDate")&&
+                if (
+                    currentItem.hasChild("userUid") &&
+                    currentItem.hasChild("beginning") &&
+                    currentItem.hasChild("end") &&
+                    currentItem.hasChild("roomUid") &&
+                    currentItem.hasChild("description") &&
+                    currentItem.hasChild("bookingDate") &&
                     currentItem.hasChild("uuid")
-                        ) {
+                ) {
 
                     val booking = Reservation(
                         map["userUid"] as String,
@@ -82,7 +83,7 @@ class ScheduleActivity : AppCompatActivity() {
                         map["bookingDate"] as String,
                         map["uuid"] as String
                     )
-                    if(booking.bookingDate == bookingDate && booking.roomUid == roomID) {
+                    if (booking.bookingDate == bookingDate && booking.roomUid == roomID) {
                         listBooking.add(booking)
                     }
                 }
@@ -91,9 +92,8 @@ class ScheduleActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun addToSchedule()
-    {
-        val dialogBox = ScheduleDialogBox.newInstance(roomID,bookingDate)
+    private fun addToSchedule() {
+        val dialogBox = ScheduleDialogBox.newInstance(roomID, bookingDate)
         dialogBox.show(supportFragmentManager, "addToSchedule")
     }
 }

@@ -25,6 +25,6 @@ data class Reservation(
     val end: String = "",
     val roomUid: String = "",
     var description: String = "",
-    var bookingDate: String ="",
+    var bookingDate: String = "",
     var uuid: String = ""
 )

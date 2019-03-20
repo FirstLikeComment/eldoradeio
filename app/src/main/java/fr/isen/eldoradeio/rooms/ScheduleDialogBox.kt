@@ -6,13 +6,12 @@ import android.support.design.widget.TextInputEditText
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.util.Log
-import android.widget.*
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
 
-class ScheduleDialogBox (): DialogFragment()
-{
+class ScheduleDialogBox : DialogFragment() {
     companion object {
 
         const val TAG = "ScheduleDialogBox"
@@ -28,13 +27,14 @@ class ScheduleDialogBox (): DialogFragment()
             return fragment
         }
     }
-    lateinit var description: TextInputEditText
-    lateinit var beginning: TextInputEditText
-    lateinit var end: TextInputEditText
-    val mDatabase = FirebaseDatabase.getInstance()
-    val mAuth = FirebaseAuth.getInstance()
-    val userId = mAuth.currentUser!!.uid
-    val mBookingReference = mDatabase.getReference("booking")
+
+    private lateinit var description: TextInputEditText
+    private lateinit var beginning: TextInputEditText
+    private lateinit var end: TextInputEditText
+    private val mDatabase = FirebaseDatabase.getInstance()
+    private val mAuth = FirebaseAuth.getInstance()
+    private val userId = mAuth.currentUser!!.uid
+    private val mBookingReference = mDatabase.getReference("booking")
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
@@ -50,39 +50,37 @@ class ScheduleDialogBox (): DialogFragment()
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(dialogView)
                 // Add action buttons
-                .setPositiveButton("AJOUTER"
-                ) { dialog, id ->
+                .setPositiveButton(
+                    "AJOUTER"
+                ) { _, _ ->
 
                     sendBooking(roomID, bookingDate)
 
                 }
-                .setNegativeButton("NON"
-                ) { dialog, id ->
-                    getDialog().cancel()
+                .setNegativeButton(
+                    "NON"
+                ) { _, _ ->
+                    dialog.cancel()
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    public fun addDescription(key: String)
-    {
+    private fun addDescription(key: String) {
         mBookingReference.child(key).child("description").setValue(description.text.toString())
 
     }
 
-    public fun addBeginning(key: String)
-    {
+    private fun addBeginning(key: String) {
         mBookingReference.child(key).child("beginning").setValue(beginning.text.toString())
 
     }
 
-    public fun addEnd(key: String)
-    {
+    private fun addEnd(key: String) {
         mBookingReference.child(key).child("end").setValue(end.text.toString())
     }
 
-    public fun sendBooking(roomID: String, bookingDate: String)
-    {
+    private fun sendBooking(roomID: String, bookingDate: String) {
         try//if(firstName.text !=null && lastName.text !=null &&dob.text !=null && spinner !=null )
         {
             val key = mBookingReference.push().key
@@ -93,14 +91,11 @@ class ScheduleDialogBox (): DialogFragment()
             addDescription(key)
             addBeginning(key)
             addEnd(key)
-        }
-        catch (e:Exception)
-        {
+        } catch (e: Exception) {
             Toast.makeText(activity, getString(R.string.book_room_failed), Toast.LENGTH_SHORT).show()
-            Log.e("TAG","bookingCreationError: ",e)
+            Log.e("TAG", "bookingCreationError: ", e)
         }
     }
-
 
 
 }

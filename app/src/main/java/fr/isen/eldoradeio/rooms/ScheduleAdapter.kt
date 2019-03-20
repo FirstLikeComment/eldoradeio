@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import fr.isen.eldoradeio.R
 import fr.isen.eldoradeio.Reservation
 
@@ -16,9 +19,9 @@ class ScheduleAdapter(private val context: Context, private val listBookings: Ar
     companion object {
         const val TAG = "ScheduleAdapter"
     }
+
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mUserReference = mDatabase.getReference("users")
-
 
 
     override fun getViewTypeCount(): Int {
@@ -35,7 +38,7 @@ class ScheduleAdapter(private val context: Context, private val listBookings: Ar
     }
 
     override fun getItem(position: Int): Any {
-        return listBookings.get(position)
+        return listBookings[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -65,16 +68,18 @@ class ScheduleAdapter(private val context: Context, private val listBookings: Ar
         }
 
         //fetching our user's full name to display it
-        mUserReference.child(listBookings[position].userUid).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val map = dataSnapshot.value as HashMap<String, Any>
-                val fullName = map["firstName"] as String + " " + map["lastName"] as String
-                holder.tvUser!!.text = fullName
-            }
-            override fun onCancelled(databaseError: DatabaseError) {
-                Log.w(TAG, "loadUser:onCancelled", databaseError.toException())
-            }
-        })
+        mUserReference.child(listBookings[position].userUid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val map = dataSnapshot.value as HashMap<String, Any>
+                    val fullName = map["firstName"] as String + " " + map["lastName"] as String
+                    holder.tvUser!!.text = fullName
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.w(TAG, "loadUser:onCancelled", databaseError.toException())
+                }
+            })
         holder.tvUser!!.text = listBookings[position].userUid
         holder.tvDescriptif!!.text = listBookings[position].description
         holder.tvDebut!!.text = listBookings[position].beginning
