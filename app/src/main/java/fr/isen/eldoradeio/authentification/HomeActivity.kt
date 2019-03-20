@@ -22,15 +22,15 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        changeTitre()
+        changeTitle()
         downloadPicture()
 
         profile.setOnClickListener {
-            afficheProfil()
+            displayProfile()
         }
 
         recherche.setOnClickListener {
-            afficheRooms()
+            displayRooms()
         }
 
 
@@ -58,30 +58,30 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    public fun changeTitre() {
+    public fun changeTitle() {
         user?.let {
             str = getString(R.string.welcome_home) + user.email.toString()
             bienvenue.text = str
         }
     }
 
-    public fun afficheProfil() {
+    public fun displayProfile() {
         startActivity(Intent(this, ProfileActivity::class.java))
         finish()
     }
 
-    public fun afficheRooms() {
+    public fun displayRooms() {
         startActivity(Intent(this, RoomsActivity::class.java))
         finish()
     }
 
-    public fun afficheLogin() {
+    public fun displayLogin() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 
     public fun disconnection() {
         FirebaseAuth.getInstance().signOut()
-        afficheLogin()
+        displayLogin()
     }
 }
