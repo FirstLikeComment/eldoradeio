@@ -47,7 +47,7 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun downloadPicture(){
+    private fun downloadPicture() {
         // Reference to an image file in Cloud Storage
         val storage = FirebaseStorage.getInstance()
         val storageReference = storage.reference
@@ -75,9 +75,10 @@ class HomeActivity : AppCompatActivity() {
                     // This method is called once with the initial value and again
                     // whenever data at this location is updated.
                     val value = dataSnapshot.getValue(String::class.java)
-                    val str:String = getString(R.string.welcome_home)+value.toString()
+                    val str: String = getString(R.string.welcome_home) + value.toString()
                     homeWelcome.text = str
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                     // Failed to read value
                     Log.w(TAG, "Failed to read value.", error.toException())

@@ -15,8 +15,8 @@ class ScheduleActivity : AppCompatActivity() {
     companion object {
         const val TAG = "ScheduleActivity"
     }
-    var listBooking: ArrayList<Reservation> = ArrayList()
-    private val adapter = ScheduleAdapter(this,listBooking)
+    private var listBooking: ArrayList<Reservation> = ArrayList()
+    private val adapter = CommentAdapter(this,listBooking)
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mBookingReference = mDatabase.getReference("booking")
     private var roomID = ""
@@ -34,12 +34,12 @@ class ScheduleActivity : AppCompatActivity() {
         }
     }
 
-    public fun getBookingsFromFirebase()
+    private fun getBookingsFromFirebase()
     {
         mBookingReference.orderByKey().addValueEventListener(bookingListener)
     }
 
-    var bookingListener: ValueEventListener = object : ValueEventListener {
+    private var bookingListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             // Get Post object and use the values to update the UI
             addDataToList(dataSnapshot)

@@ -13,7 +13,7 @@ import fr.isen.eldoradeio.Group
 import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.group_item_row.view.*
 
-class GroupAdapter (private val items : ArrayList<Group>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class GroupAdapter(private val items: ArrayList<Group>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,8 +37,7 @@ class GroupAdapter (private val items : ArrayList<Group>, val context: Context) 
         }
     }
 
-    fun removeUserFromGroup(group: Group)
-    {
+    private fun removeUserFromGroup(group: Group) {
         val user = FirebaseAuth.getInstance().currentUser
         val mDatabase = FirebaseDatabase.getInstance()
         val mGroupReference = mDatabase.getReference("groups").child(group.uuid)
@@ -47,7 +46,7 @@ class GroupAdapter (private val items : ArrayList<Group>, val context: Context) 
 
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     // Holds the TextViews and the imageView that constitute a random user
     val groupName: TextView = view.groupItemGroupNameText
     val removeButton: Button = view.groupItemRemoveButton

@@ -4,24 +4,24 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
-import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.view.Gravity
 import android.view.View
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
-import kotlinx.android.synthetic.main.dialog_update.*
 
-class ProfileUpdateDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
-{
-    lateinit var firstName: TextInputEditText
-    lateinit var lastName: TextInputEditText
-    lateinit var dob: TextInputEditText
-    lateinit var spinner: Spinner
-    lateinit var spinnerItem: String
+class ProfileUpdateDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener {
+    private lateinit var firstName: TextInputEditText
+    private lateinit var lastName: TextInputEditText
+    private lateinit var dob: TextInputEditText
+    private lateinit var spinner: Spinner
+    private lateinit var spinnerItem: String
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         // ...
@@ -32,6 +32,7 @@ class ProfileUpdateDialogBox : DialogFragment(), AdapterView.OnItemSelectedListe
             spinnerItem = parent.getItemAtPosition(position) as String
         }
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
@@ -47,69 +48,67 @@ class ProfileUpdateDialogBox : DialogFragment(), AdapterView.OnItemSelectedListe
             // Pass null as the parent view because its going in the dialog layout
             builder.setView(dialogView)
                 // Add action buttons
-                .setPositiveButton("MODIFIER"
-                ) { dialog, id ->
+                .setPositiveButton(
+                    "MODIFIER"
+                ) { _, _ ->
 
-                    UpdateProfil()
+                    updateProfil()
 
                 }
-                .setNegativeButton("NON"
-                ) { dialog, id ->
-                    getDialog().cancel()
+                .setNegativeButton(
+                    "NON"
+                ) { _, _ ->
+                    dialog.cancel()
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    public fun changeNom()
-    {
+    private fun changeNom() {
         val mDatabase = FirebaseDatabase.getInstance()
         val mAuth = FirebaseAuth.getInstance()
         val userId = mAuth.currentUser!!.uid
-        val mCommentReference = mDatabase.getReference("users/"+userId+"/firstName")
+        val mCommentReference = mDatabase.getReference("users/$userId/firstName")
         mCommentReference
-            .setValue(firstName.text.toString()) { firebaseError, firebase ->
+            .setValue(firstName.text.toString()) { _, _ ->
             }
 
     }
 
-    public fun changeLastNom()
-    {
+    private fun changeLastNom() {
         val mDatabase = FirebaseDatabase.getInstance()
         val mAuth = FirebaseAuth.getInstance()
         val userId = mAuth.currentUser!!.uid
-        val mCommentReference = mDatabase.getReference("users/"+userId+"/lastName")
+        val mCommentReference = mDatabase.getReference("users/$userId/lastName")
         mCommentReference
-            .setValue(lastName.text.toString()) { firebaseError, firebase ->
+            .setValue(lastName.text.toString()) { _, _ ->
             }
 
     }
 
-    public fun changeDob()
-    {
+    private fun changeDob() {
         val mDatabase = FirebaseDatabase.getInstance()
         val mAuth = FirebaseAuth.getInstance()
         val userId = mAuth.currentUser!!.uid
-        val mCommentReference = mDatabase.getReference("users/"+userId+"/dob")
+        val mCommentReference = mDatabase.getReference("users/$userId/dob")
         mCommentReference
-            .setValue(dob.text.toString()) { firebaseError, firebase ->
+            .setValue(dob.text.toString()) { _, _ ->
             }
 
     }
 
-    public fun changeYear()
-    {
+    private fun changeYear() {
         val mDatabase = FirebaseDatabase.getInstance()
         val mAuth = FirebaseAuth.getInstance()
         val userId = mAuth.currentUser!!.uid
-        val mCommentReference = mDatabase.getReference("users/"+userId+"/year")
+        val mCommentReference = mDatabase.getReference("users/$userId/year")
         mCommentReference
-            .setValue(spinnerItem) { firebaseError, firebase ->
+            .setValue(spinnerItem) { _, _ ->
             }
 
     }
 
-    private fun handleSpinner(dialogView:View){
+    private fun handleSpinner(dialogView: View) {
         val spinner: Spinner = dialogView.findViewById(R.id.year_spinner_update)
         ArrayAdapter.createFromResource(
             activity,
@@ -123,14 +122,16 @@ class ProfileUpdateDialogBox : DialogFragment(), AdapterView.OnItemSelectedListe
         }
         spinner.onItemSelectedListener = this
     }
-    private fun selectDate(){
 
-        dob.setOnFocusChangeListener {view, hasFocus->
+    private fun selectDate() {
+
+        dob.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 view.clearFocus()
                 activity?.let {
-                    val dpd = DatePickerDialog(it,
-                        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    val dpd = DatePickerDialog(
+                        it,
+                        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                             val dateSave: String =
                                 String.format(getString(R.string.date_format), year, monthOfYear + 1, dayOfMonth)
                             dob.setText(dateSave)
@@ -143,21 +144,17 @@ class ProfileUpdateDialogBox : DialogFragment(), AdapterView.OnItemSelectedListe
     }
 
 
-    public fun UpdateProfil()
-    {
+    private fun updateProfil() {
         try//if(firstName.text !=null && lastName.text !=null &&dob.text !=null && spinner !=null )
         {
             changeNom()
             changeLastNom()
             changeDob()
             changeYear()
-        }
-        catch (e:Exception)
-        {
+        } catch (e: Exception) {
             Toast.makeText(activity, getString(R.string.null_field), Toast.LENGTH_SHORT).show()
         }
     }
-
 
 
 }

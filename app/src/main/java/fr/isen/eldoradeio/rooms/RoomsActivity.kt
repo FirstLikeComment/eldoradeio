@@ -1,7 +1,7 @@
 package fr.isen.eldoradeio.rooms
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Gravity
@@ -15,10 +15,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import fr.isen.eldoradeio.R
-import fr.isen.eldoradeio.RoomAdapter
 import fr.isen.eldoradeio.Room
+import fr.isen.eldoradeio.RoomAdapter
 import kotlinx.android.synthetic.main.activity_rooms.*
-
 
 
 class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -65,10 +64,8 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val id = parent?.id
-        when(id)
-        {
-            R.id.roomFilterChoiceSpinner ->
-            {
+        when (id) {
+            R.id.roomFilterChoiceSpinner -> {
                 val selectedFloor = (parent.getItemAtPosition(position) as String).toInt()
                 currentFloor = selectedFloor
                 selectRoomsinFloor(selectedFloor)
@@ -82,8 +79,7 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     private fun selectRoomsinFloor(selectedFloor: Int?) {
-        if (selectedFloor != null)
-        {
+        if (selectedFloor != null) {
             selectedRoomList.clear()
             for (room: Room in roomList) {
                 if (room.roomFloor == selectedFloor) selectedRoomList.add(room)
@@ -95,8 +91,9 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private val roomListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             updateRoomList(dataSnapshot)
-            Toast.makeText(this@RoomsActivity,getString(R.string.toast_room_list_changed),Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RoomsActivity, getString(R.string.toast_room_list_changed), Toast.LENGTH_SHORT).show()
         }
+
         override fun onCancelled(databaseError: DatabaseError) {
             Log.w(TAG, "loadRoom:onCancelled", databaseError.toException())
         }
@@ -106,22 +103,23 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             favoriteList.clear()
             Log.w(TAG, "loading ${dataSnapshot.childrenCount} favorites: ")
-            for(roomKey: DataSnapshot in dataSnapshot.children)
-            {
+            for (roomKey: DataSnapshot in dataSnapshot.children) {
                 mRoomReference.child(roomKey.key!!).addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         favoriteList.add(roomKey.key!!)
                         roomListAdapter.notifyDataSetChanged()
                     }
+
                     override fun onCancelled(databaseError: DatabaseError) {
                         Log.w(TAG, "loadItem:onCancelled", databaseError.toException())
                     }
                 })
             }
-            if(dataSnapshot.childrenCount.toInt() == 0) {
+            if (dataSnapshot.childrenCount.toInt() == 0) {
                 roomListAdapter.notifyDataSetChanged()
             }
         }
+
         override fun onCancelled(databaseError: DatabaseError) {
             Log.w(TAG, "loadItem:onCancelled", databaseError.toException())
         }
@@ -140,9 +138,13 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 val currentItem = items.next()
                 //get current data in a map
                 val map = currentItem.value as HashMap<String, Any>
-                val room = Room(map["roomName"] as String, (map["roomFloor"] as Long).toInt(), (map["availability"] as Long).toInt(), map["uuid"] as String)
-                if (!floorList.contains(room.roomFloor.toString()))
-                {
+                val room = Room(
+                    map["roomName"] as String,
+                    (map["roomFloor"] as Long).toInt(),
+                    (map["availability"] as Long).toInt(),
+                    map["uuid"] as String
+                )
+                if (!floorList.contains(room.roomFloor.toString())) {
                     floorList.add(room.roomFloor.toString())
                 }
                 roomList.add(room)
@@ -153,7 +155,7 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             with(roomFilterChoiceSpinner)
             {
                 adapter = filterChoiceAdapter
-                setSelection(-1,false)
+                setSelection(-1, false)
                 onItemSelectedListener = this@RoomsActivity
                 gravity = Gravity.CENTER
             }

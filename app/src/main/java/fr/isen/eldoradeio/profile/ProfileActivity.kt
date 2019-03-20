@@ -8,11 +8,11 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
@@ -33,8 +33,8 @@ class ProfileActivity : AppCompatActivity() {
         const val TAG = "ProfileActivity"
     }
 
-    val user = FirebaseAuth.getInstance().currentUser
-    lateinit var mStorage: FirebaseStorage
+    private val user = FirebaseAuth.getInstance().currentUser
+    private lateinit var mStorage: FirebaseStorage
 
     private var filePath: Uri? = null
 
@@ -45,7 +45,7 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
 
-        mStorage= FirebaseStorage.getInstance()
+        mStorage = FirebaseStorage.getInstance()
 
         printAll()
         downloadPicture()
@@ -59,12 +59,12 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         profileFavoriteButton.setOnClickListener {
-            val favoriteIntent = Intent(this@ProfileActivity,FavoriteActivity::class.java)
+            val favoriteIntent = Intent(this@ProfileActivity, FavoriteActivity::class.java)
             startActivity(favoriteIntent)
         }
 
         profileGroupsButton.setOnClickListener {
-            val groupIntent = Intent (this@ProfileActivity,GroupActivity::class.java)
+            val groupIntent = Intent(this@ProfileActivity, GroupActivity::class.java)
             startActivity(groupIntent)
         }
 
@@ -108,7 +108,9 @@ class ProfileActivity : AppCompatActivity() {
             //Permission is not granted
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this,
-                    perm)) {
+                    perm
+                )
+            ) {
             }
             ActivityCompat.requestPermissions(
                 this,
@@ -128,8 +130,9 @@ class ProfileActivity : AppCompatActivity() {
         if (requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 selectImageInAlbum()
-                Log.d(TAG,"WRITE_EXTERNAL_STORAGE permission granted")
-                Toast.makeText(this@ProfileActivity, "WRITE_EXTERNAL_STORAGE permission granted", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "WRITE_EXTERNAL_STORAGE permission granted")
+                Toast.makeText(this@ProfileActivity, "WRITE_EXTERNAL_STORAGE permission granted", Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 Toast.makeText(this, getString(R.string.err_perm_select_image), Toast.LENGTH_LONG).show()
             }
@@ -138,7 +141,7 @@ class ProfileActivity : AppCompatActivity() {
         if (requestCode == REQUEST_TAKE_PHOTO) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 takePhoto()
-                Log.d(TAG,"CAMERA permission granted")
+                Log.d(TAG, "CAMERA permission granted")
                 Toast.makeText(this@ProfileActivity, "CAMERA permission granted", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, getString(R.string.err_perm_camera), Toast.LENGTH_LONG).show()
@@ -148,7 +151,7 @@ class ProfileActivity : AppCompatActivity() {
 
     }
 
-    private fun uploadPicture(){
+    private fun uploadPicture() {
 
         val mPictureReference = mStorage.reference
 
@@ -172,7 +175,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun downloadPicture(){
+    private fun downloadPicture() {
         // Reference to an image file in Cloud Storage
         val storage = FirebaseStorage.getInstance()
         val storageReference = storage.reference
@@ -207,28 +210,27 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun alertDialogCamera(){
+    private fun alertDialogCamera() {
         val builder = AlertDialog.Builder(this@ProfileActivity)
         builder.setTitle("Choose your new face.")
-        builder.setPositiveButton("CHOOSE FROM GALLERY"){_,_ ->
+        builder.setPositiveButton("CHOOSE FROM GALLERY") { _, _ ->
             requestPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_SELECT_IMAGE_IN_ALBUM) {
                 selectImageInAlbum()
             }
         }
-        builder.setNegativeButton("TAKE PHOTO"){_,_ ->
+        builder.setNegativeButton("TAKE PHOTO") { _, _ ->
             requestPermission(android.Manifest.permission.CAMERA, REQUEST_TAKE_PHOTO) {
                 takePhoto()
             }
         }
-        builder.setNeutralButton("CANCEL"){_,_ ->
+        builder.setNeutralButton("CANCEL") { _, _ ->
             Toast.makeText(this@ProfileActivity, "Cancelled", Toast.LENGTH_SHORT).show()
         }
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
 
-    public fun printFirstName()
-    {
+    private fun printFirstName() {
         //update_processing.visibility = View.VISIBLE
 
         val mDatabase = FirebaseDatabase.getInstance()
@@ -242,9 +244,10 @@ class ProfileActivity : AppCompatActivity() {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 val value = dataSnapshot.getValue(String::class.java)
-                val str:String = getString(R.string.profile_fName_value)+value.toString()
+                val str: String = getString(R.string.profile_fName_value) + value.toString()
                 firstnameProfile.text = str
             }
+
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException())
@@ -252,8 +255,7 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
-    public fun printLastName()
-    {
+    private fun printLastName() {
         //update_processing.visibility = View.VISIBLE
 
         val mDatabase = FirebaseDatabase.getInstance()
@@ -267,9 +269,10 @@ class ProfileActivity : AppCompatActivity() {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 val value = dataSnapshot.getValue(String::class.java)
-                val str:String = getString(R.string.profile_lName_value)+value.toString()
+                val str: String = getString(R.string.profile_lName_value) + value.toString()
                 lastnameProfile.text = str
             }
+
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException())
@@ -277,8 +280,8 @@ class ProfileActivity : AppCompatActivity() {
 
         })
     }
-    public fun printDob()
-    {
+
+    private fun printDob() {
         //update_processing.visibility = View.VISIBLE
 
         val mDatabase = FirebaseDatabase.getInstance()
@@ -292,9 +295,10 @@ class ProfileActivity : AppCompatActivity() {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 val value = dataSnapshot.getValue(String::class.java)
-                val str:String = getString(R.string.profile_DOB_value)+value.toString()
+                val str: String = getString(R.string.profile_DOB_value) + value.toString()
                 dobProfile.text = str
             }
+
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException())
@@ -302,8 +306,8 @@ class ProfileActivity : AppCompatActivity() {
 
         })
     }
-    public fun printYear()
-    {
+
+    private fun printYear() {
         //update_processing.visibility = View.VISIBLE
 
         val mDatabase = FirebaseDatabase.getInstance()
@@ -317,9 +321,10 @@ class ProfileActivity : AppCompatActivity() {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 val value = dataSnapshot.getValue(String::class.java)
-                val str:String = getString(R.string.profile_year_value)+value.toString()
+                val str: String = getString(R.string.profile_year_value) + value.toString()
                 yearProfile.text = str
             }
+
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException())
@@ -327,14 +332,13 @@ class ProfileActivity : AppCompatActivity() {
 
         })
     }
-    public fun printAll()
-    {
+
+    private fun printAll() {
         printFirstName()
         printLastName()
         printDob()
         printYear()
     }
-
 
 
 }

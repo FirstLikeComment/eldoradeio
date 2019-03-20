@@ -33,15 +33,14 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
 
     lateinit var auth: FirebaseAuth
     lateinit var mDatabase: FirebaseDatabase
-    lateinit var mStorage:FirebaseStorage
+    lateinit var mStorage: FirebaseStorage
 
     private var filePath: Uri? = null
 
     private var spinnerItem: String = ""
 
-    val REQUEST_SELECT_IMAGE_IN_ALBUM = 10
-    val REQUEST_TAKE_PHOTO = 20
-
+    private val REQUEST_SELECT_IMAGE_IN_ALBUM = 10
+    private val REQUEST_TAKE_PHOTO = 20
 
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -70,7 +69,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
 
         auth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance()
-        mStorage= FirebaseStorage.getInstance()
+        mStorage = FirebaseStorage.getInstance()
         selectDate()
 
         bRegister.setOnClickListener {
@@ -90,7 +89,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         var uid: String = ""
     )
 
-    public fun createAccount() {
+    private fun createAccount() {
 
         val mUserReference = mDatabase.getReference("users")
 
@@ -129,8 +128,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                     }
 
                 }
-        }
-        else {
+        } else {
             Toast.makeText(baseContext, getString(R.string.missing_field), Toast.LENGTH_SHORT).show()
             Log.w("SignIn", "signUpWithEmail:empty")
         }
@@ -151,7 +149,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         spinner.onItemSelectedListener = this
     }
 
-    public fun updateUI(currentUser: FirebaseUser?) {
+    private fun updateUI(currentUser: FirebaseUser?) {
         if (currentUser != null) {
             redirectToHome()
         }
@@ -191,7 +189,9 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             //Permission is not granted
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this,
-                    perm)) {
+                    perm
+                )
+            ) {
             }
             ActivityCompat.requestPermissions(
                 this,
@@ -202,7 +202,8 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         } else {
             //Permission is granted
             handler()
-            Toast.makeText(this@RegisterActivity, getString(R.string.permission_already_granted), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RegisterActivity, getString(R.string.permission_already_granted), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -211,8 +212,12 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         if (requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 selectImageInAlbum()
-                Log.d("HomeActivity:","WRITE_EXTERNAL_STORAGE permission granted")
-                Toast.makeText(this@RegisterActivity, getString(R.string.write_external_storage_permission_granted), Toast.LENGTH_SHORT).show()
+                Log.d("HomeActivity:", "WRITE_EXTERNAL_STORAGE permission granted")
+                Toast.makeText(
+                    this@RegisterActivity,
+                    getString(R.string.write_external_storage_permission_granted),
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 Toast.makeText(this, getString(R.string.err_perm_select_image), Toast.LENGTH_LONG).show()
             }
@@ -221,8 +226,9 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         if (requestCode == REQUEST_TAKE_PHOTO) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 takePhoto()
-                Log.d("HomeActivity:",getString(R.string.camera_permission_granted))
-                Toast.makeText(this@RegisterActivity, getString(R.string.camera_permission_granted), Toast.LENGTH_SHORT).show()
+                Log.d("HomeActivity:", getString(R.string.camera_permission_granted))
+                Toast.makeText(this@RegisterActivity, getString(R.string.camera_permission_granted), Toast.LENGTH_SHORT)
+                    .show()
             } else {
                 Toast.makeText(this, getString(R.string.err_perm_camera), Toast.LENGTH_LONG).show()
             }
@@ -231,7 +237,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
 
     }
 
-    private fun uploadPicture(){
+    private fun uploadPicture() {
 
         val mPictureReference = mStorage.reference
 
@@ -272,20 +278,20 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         }
     }
 
-    private fun alertDialogCamera(){
+    private fun alertDialogCamera() {
         val builder = AlertDialog.Builder(this@RegisterActivity)
         builder.setTitle("Choose your new face.")
-        builder.setPositiveButton("CHOOSE FROM GALLERY"){_,_ ->
+        builder.setPositiveButton("CHOOSE FROM GALLERY") { _, _ ->
             requestPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE, REQUEST_SELECT_IMAGE_IN_ALBUM) {
                 selectImageInAlbum()
             }
         }
-        builder.setNegativeButton("TAKE PHOTO"){_,_ ->
+        builder.setNegativeButton("TAKE PHOTO") { _, _ ->
             requestPermission(android.Manifest.permission.CAMERA, REQUEST_TAKE_PHOTO) {
                 takePhoto()
             }
         }
-        builder.setNeutralButton("CANCEL"){_,_ ->
+        builder.setNeutralButton("CANCEL") { _, _ ->
             Toast.makeText(this@RegisterActivity, getString(R.string.take_photo_cancel), Toast.LENGTH_SHORT).show()
         }
         val dialog: AlertDialog = builder.create()
@@ -300,7 +306,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                 view.clearFocus()
                 val dpd = DatePickerDialog(
                     this,
-                    DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                         val dateSave: String =
                             String.format(getString(R.string.date_format), year, monthOfYear + 1, dayOfMonth)
                         dobFieldRegister.setText(dateSave)

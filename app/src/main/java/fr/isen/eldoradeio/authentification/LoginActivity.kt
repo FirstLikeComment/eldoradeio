@@ -30,27 +30,25 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    public override fun onStart()
-    {
+    public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         updateUI(currentUser)
     }
 
-    private fun signIn()
-    {
+    private fun signIn() {
         val email: String = emailField.text.toString()
         val pwd: String = pwdField.text.toString()
         if (email.isNotEmpty() && pwd.isNotEmpty()) {
             auth.signInWithEmailAndPassword(email, pwd)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(baseContext, getString(R.string.signin_success), Toast.LENGTH_SHORT).show()
-                            Log.d("SignIn", "signInWithEmail:success")
-                            val user = auth.currentUser
-                            updateUI(user)
+                        // Sign in success, update UI with the signed-in user's information
+                        Toast.makeText(baseContext, getString(R.string.signin_success), Toast.LENGTH_SHORT).show()
+                        Log.d("SignIn", "signInWithEmail:success")
+                        val user = auth.currentUser
+                        updateUI(user)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("SignIn", "signInWithEmail:failure", task.exception)
@@ -61,16 +59,14 @@ class LoginActivity : AppCompatActivity() {
                         updateUI(null)
                     }
                 }
-        }
-        else {
+        } else {
             Toast.makeText(baseContext, getString(R.string.missing_field), Toast.LENGTH_SHORT).show()
             Log.w("SignIn", "signInWithEmail:empty")
         }
     }
 
-    private fun updateUI(currentUser: FirebaseUser?)
-    {
-        if(currentUser != null) {
+    private fun updateUI(currentUser: FirebaseUser?) {
+        if (currentUser != null) {
             redirectToHome()
         }
     }
