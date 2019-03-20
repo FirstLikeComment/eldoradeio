@@ -48,5 +48,8 @@
     <string name="profile_picture">Your best bream\'s shot !</string>
     <string name="err_perm_select_image">We need your authorization to access your gallery!</string>
     <string name="err_perm_camera">We need your authorization to access your camera!</string>
+    <string name="status_available">available</string>
+    <string name="status_partially_available">partially available</string>
+    <string name="status_unavailable">probably unavailable</string>
 
 </resources>
