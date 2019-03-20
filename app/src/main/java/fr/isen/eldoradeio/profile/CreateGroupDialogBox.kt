@@ -6,11 +6,10 @@ import android.support.design.widget.TextInputEditText
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.util.Log
-import android.widget.*
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
-import kotlinx.android.synthetic.main.dialog_create_group.*
 
 class CreateGroupDialogBox : DialogFragment()
 {
@@ -27,14 +26,14 @@ class CreateGroupDialogBox : DialogFragment()
             builder.setView(dialogView)
                 // Add action buttons
                 .setPositiveButton("MODIFIER"
-                ) { dialog, id ->
+                ) { _, _ ->
 
                     createGroup()
 
                 }
                 .setNegativeButton("ANNULER"
-                ) { dialog, id ->
-                    getDialog().cancel()
+                ) { _, _ ->
+                    dialog.cancel()
                 }
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")

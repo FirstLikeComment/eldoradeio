@@ -1,15 +1,12 @@
 package fr.isen.eldoradeio.authentification
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthEmailException
-import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.FirebaseUser
 import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.activity_login.*
@@ -41,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         updateUI(currentUser)
     }
 
-    public fun signIn()
+    private fun signIn()
     {
         val email: String = emailField.text.toString()
         val pwd: String = pwdField.text.toString()
@@ -71,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    public fun updateUI(currentUser: FirebaseUser?)
+    private fun updateUI(currentUser: FirebaseUser?)
     {
         if(currentUser != null) {
             redirectToHome()
