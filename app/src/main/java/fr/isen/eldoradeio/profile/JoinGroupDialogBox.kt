@@ -102,7 +102,7 @@ class JoinGroupDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         }
         catch (e:Exception)
         {
-            Toast.makeText(activity, "There was a problem while joining the group", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.join_group_failed), Toast.LENGTH_SHORT).show()
             Log.e("JoinGroupDialogBox","Error: ",e)
         }
     }

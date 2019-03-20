@@ -56,7 +56,7 @@ class CreateGroupDialogBox : DialogFragment()
         }
         catch (e:Exception)
         {
-            Toast.makeText(activity, "There was a problem while creating the group", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.create_group_failed), Toast.LENGTH_SHORT).show()
             Log.e("CreateGroupDialogBox","Error: ",e)
         }
     }

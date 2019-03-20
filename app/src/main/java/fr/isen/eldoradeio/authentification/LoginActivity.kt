@@ -50,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(baseContext, "Sign in success", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, getString(R.string.signin_success), Toast.LENGTH_SHORT).show()
                             Log.d("SignIn", "signInWithEmail:success")
                             val user = auth.currentUser
                             updateUI(user)
@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
                 }
         }
         else {
-            Toast.makeText(baseContext, "Please fill all fields.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(baseContext, getString(R.string.missing_field), Toast.LENGTH_SHORT).show()
             Log.w("SignIn", "signInWithEmail:empty")
         }
     }

@@ -44,4 +44,20 @@
     <string name="profile_group">Groupes</string>
     <string name="group_item_group_name">Nom du groupe</string>
     <string name="group_item_leave">Quitter</string>
+    <string name="null_field">Champ nul</string>
+    <string name="singup_success">Inscription réussie</string>
+    <string name="singup_failed">Inscription échouée</string>
+    <string name="missing_field">Veuillez remplir tous les champs.</string>
+    <string name="permission_granted">Permission accordée. Merci!</string>
+    <string name="permission_already_granted">Les permissions sont déjà accordées</string>
+    <string name="write_external_storage_permission_granted">Permission WRITE_EXTERNAL_STORAGE accordée</string>
+    <string name="camera_permission_granted">Permission CAMERA accordée</string>
+    <string name="upload_failed">Téléversement échoué</string>
+    <string name="upload_success">Téléversement réussi</string>
+    <string name="take_photo_cancel">Annulé</string>
+    <string name="signin_success">Connexion réussie</string>
+    <string name="download_failure">Téléchargement échoué</string>
+    <string name="join_group_failed">Il y a eu un problème lors de l\'ajout au groupe</string>
+    <string name="create_group_failed">Il y a eu un problème lors de la création du groupe</string>
+    <string name="book_room_failed">Il y a eu un problème lors de la réservation de la salle</string>
 </resources>

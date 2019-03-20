@@ -154,7 +154,7 @@ class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
         }
         catch (e:Exception)
         {
-            Toast.makeText(activity, "null field", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.null_field), Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -51,5 +51,21 @@
     <string name="status_available">available</string>
     <string name="status_partially_available">partially available</string>
     <string name="status_unavailable">probably unavailable</string>
+    <string name="null_field">Null field</string>
+    <string name="singup_success">Signup success</string>
+    <string name="singup_failed">Registration failed.</string>
+    <string name="missing_field">Please fill all fields.</string>
+    <string name="permission_granted">Permission accepted. Thanks!</string>
+    <string name="permission_already_granted">Permissions have already been accepted!</string>
+    <string name="write_external_storage_permission_granted">WRITE_EXTERNAL_STORAGE permission granted</string>
+    <string name="upload_failed">Failed upload</string>
+    <string name="upload_success">Upload successful</string>
+    <string name="take_photo_cancel">Cancelled</string>
+    <string name="signin_success">Sign in success</string>
+    <string name="download_failure">Failed download</string>
+    <string name="join_group_failed">There was a problem while joining the group</string>
+    <string name="create_group_failed">There was a problem while creating the group</string>
+    <string name="book_room_failed">There was an issue while booking the room</string>
+    <string name="camera_permission_granted">CAMERA permission granted</string>
 
 </resources>

@@ -54,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
                 .error(R.drawable.doraderouge)
                 .into(imageView)
         }.addOnFailureListener {
-            Toast.makeText(this@HomeActivity, "Failed download", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@HomeActivity, getString(R.string.download_failure), Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -96,7 +96,7 @@ class ScheduleDialogBox (): DialogFragment()
         }
         catch (e:Exception)
         {
-            Toast.makeText(activity, "There was an issue while booking the room", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.book_room_failed), Toast.LENGTH_SHORT).show()
             Log.e("TAG","bookingCreationError: ",e)
         }
     }

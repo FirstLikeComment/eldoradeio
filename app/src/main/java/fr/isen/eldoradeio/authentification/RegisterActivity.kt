@@ -106,7 +106,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Register success, update UI with the signed-in user's information
-                        Toast.makeText(baseContext, "Sign up success", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, getString(R.string.singup_success), Toast.LENGTH_SHORT).show()
                         val user = auth.currentUser
                         val userId = user!!.uid
 
@@ -125,14 +125,14 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                     } else {
                         // If register fails, display a message to the user.
                         Log.w("Authentification", "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Registration failed.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, getString(R.string.singup_failed), Toast.LENGTH_SHORT).show()
                         updateUI(null)
                     }
 
                 }
         }
         else {
-            Toast.makeText(baseContext, "Please fill all fields.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(baseContext, getString(R.string.missing_field), Toast.LENGTH_SHORT).show()
             Log.w("SignIn", "signUpWithEmail:empty")
         }
     }
@@ -199,11 +199,11 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                 arrayOf(perm),
                 requestCode
             )
-            Toast.makeText(this@RegisterActivity, "Permission accepted. Thanks!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RegisterActivity, getString(R.string.permission_granted), Toast.LENGTH_SHORT).show()
         } else {
             //Permission is granted
             handler()
-            Toast.makeText(this@RegisterActivity, "Permissions have already been accepted!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RegisterActivity, getString(R.string.permission_already_granted), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -213,7 +213,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 selectImageInAlbum()
                 Log.d("HomeActivity:","WRITE_EXTERNAL_STORAGE permission granted")
-                Toast.makeText(this@RegisterActivity, "WRITE_EXTERNAL_STORAGE permission granted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterActivity, getString(R.string.write_external_storage_permission_granted), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, getString(R.string.err_perm_select_image), Toast.LENGTH_LONG).show()
             }
@@ -222,8 +222,8 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         if (requestCode == REQUEST_TAKE_PHOTO) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 takePhoto()
-                Log.d("HomeActivity:","CAMERA permission granted")
-                Toast.makeText(this@RegisterActivity, "CAMERA permission granted", Toast.LENGTH_SHORT).show()
+                Log.d("HomeActivity:",getString(R.string.camera_permission_granted))
+                Toast.makeText(this@RegisterActivity, getString(R.string.camera_permission_granted), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, getString(R.string.err_perm_camera), Toast.LENGTH_LONG).show()
             }
@@ -248,10 +248,10 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             val uploadTask = pictureRef.putBytes(data)
             uploadTask.addOnFailureListener {
                 // Handle unsuccessful uploads
-                Toast.makeText(this@RegisterActivity, "Failed upload", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterActivity, getString(R.string.upload_failed), Toast.LENGTH_SHORT).show()
             }.addOnSuccessListener {
                 // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-                Toast.makeText(this@RegisterActivity, "Upload successful", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterActivity, getString(R.string.upload_success), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -287,7 +287,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             }
         }
         builder.setNeutralButton("CANCEL"){_,_ ->
-            Toast.makeText(this@RegisterActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@RegisterActivity, getString(R.string.take_photo_cancel), Toast.LENGTH_SHORT).show()
         }
         val dialog: AlertDialog = builder.create()
         dialog.show()
