@@ -1,30 +1,15 @@
 package fr.isen.eldoradeio.rooms
 
-import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import fr.isen.eldoradeio.R
-import fr.isen.eldoradeio.authentification.RegisterActivity
-import fr.isen.eldoradeio.rooms.ScheduleDialogBox
+import fr.isen.eldoradeio.Reservation
 import kotlinx.android.synthetic.main.activity_schedule.*
-
-data class Reservation(
-    val userUid: String = "",
-    val debut: String = "",
-    val fin: String = "",
-    val roomUid: String = "",
-    var descriptif: String = "",
-    var bookingDate: String ="",
-    var uuid: String = ""
-)
 
 class ScheduleActivity : AppCompatActivity() {
     var listBooking: ArrayList<Reservation> = ArrayList()

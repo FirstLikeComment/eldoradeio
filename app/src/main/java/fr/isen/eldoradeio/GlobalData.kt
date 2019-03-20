@@ -18,3 +18,13 @@ data class Group(
 ) {
     override fun toString(): String = groupName
 }
+
+data class Reservation(
+    val userUid: String = "",
+    val beginning: String = "",
+    val end: String = "",
+    val roomUid: String = "",
+    var description: String = "",
+    var bookingDate: String ="",
+    var uuid: String = ""
+)

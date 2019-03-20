@@ -5,15 +5,17 @@ import android.os.Bundle
 import android.support.design.widget.TextInputEditText
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
-import kotlinx.android.synthetic.main.dialog_schedule.*
 
 class ScheduleDialogBox (): DialogFragment()
 {
     companion object {
+
+        const val TAG = "ScheduleDialogBox"
 
         fun newInstance(roomID: String, bookingDate: String): ScheduleDialogBox {
             val fragment = ScheduleDialogBox()
@@ -26,9 +28,9 @@ class ScheduleDialogBox (): DialogFragment()
             return fragment
         }
     }
-    lateinit var descriptif: TextInputEditText
-    lateinit var debut: TextInputEditText
-    lateinit var fin: TextInputEditText
+    lateinit var description: TextInputEditText
+    lateinit var beginning: TextInputEditText
+    lateinit var end: TextInputEditText
     val mDatabase = FirebaseDatabase.getInstance()
     val mAuth = FirebaseAuth.getInstance()
     val userId = mAuth.currentUser!!.uid
@@ -38,9 +40,9 @@ class ScheduleDialogBox (): DialogFragment()
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_schedule, null)
-            descriptif = dialogView.findViewById(R.id.descriptifField)
-            debut = dialogView.findViewById(R.id.debutField)
-            fin = dialogView.findViewById(R.id.finField)
+            description = dialogView.findViewById(R.id.descriptifField)
+            beginning = dialogView.findViewById(R.id.debutField)
+            end = dialogView.findViewById(R.id.finField)
             val roomID = arguments?.getString("roomID")!!
             val bookingDate = arguments?.getString("bookingDate")!!
 
@@ -64,19 +66,19 @@ class ScheduleDialogBox (): DialogFragment()
 
     public fun addDescription(key: String)
     {
-        mBookingReference.child(key).child("description").setValue(descriptif.text.toString())
+        mBookingReference.child(key).child("description").setValue(description.text.toString())
 
     }
 
     public fun addBeginning(key: String)
     {
-        mBookingReference.child(key).child("beginning").setValue(debut.text.toString())
+        mBookingReference.child(key).child("beginning").setValue(beginning.text.toString())
 
     }
 
     public fun addEnd(key: String)
     {
-        mBookingReference.child(key).child("end").setValue(fin.text.toString())
+        mBookingReference.child(key).child("end").setValue(end.text.toString())
     }
 
     public fun sendBooking(roomID: String, bookingDate: String)
@@ -94,7 +96,8 @@ class ScheduleDialogBox (): DialogFragment()
         }
         catch (e:Exception)
         {
-            Toast.makeText(activity, "There was an issue while booking the room: ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "There was an issue while booking the room", Toast.LENGTH_SHORT).show()
+            Log.e("TAG","bookingCreationError: ",e)
         }
     }
 

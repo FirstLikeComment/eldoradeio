@@ -8,6 +8,7 @@ import android.util.Log
 import fr.isen.eldoradeio.Room
 import com.google.firebase.database.*
 import fr.isen.eldoradeio.R
+import fr.isen.eldoradeio.Reservation
 import kotlinx.android.synthetic.main.activity_booking.*
 
 class BookingActivity : AppCompatActivity() {
@@ -48,7 +49,7 @@ class BookingActivity : AppCompatActivity() {
             var selectedRoomReservationListener: ValueEventListener = object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     // Get Post object and use the values to update the UI
-                    val listBooking = fetchSelectedRoomReservations(dataSnapshot)
+                    val listBooking = fetchSelectedRoomTodayReservations(dataSnapshot)
                     when(listBooking.size)
                     {
                         0 ->
@@ -92,7 +93,7 @@ class BookingActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchSelectedRoomReservations(dataSnapshot: DataSnapshot): ArrayList<Reservation> {
+    private fun fetchSelectedRoomTodayReservations(dataSnapshot: DataSnapshot): ArrayList<Reservation> {
         val items = dataSnapshot.children.iterator()
         val listBooking = arrayListOf<Reservation>()
         //Check if current database contains any collection

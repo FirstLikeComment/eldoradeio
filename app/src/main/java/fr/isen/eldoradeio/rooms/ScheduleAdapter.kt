@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
 import android.widget.TextView
 import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
+import fr.isen.eldoradeio.Reservation
 
 
 class CommentAdapter(private val context: Context,private val listComments: ArrayList<Reservation>) : BaseAdapter() {
@@ -61,9 +61,9 @@ class CommentAdapter(private val context: Context,private val listComments: Arra
         }
 
         holder.tvUser!!.setText(listComments.get(position).userUid)
-        holder.tvDescriptif!!.setText(listComments.get(position).descriptif)
-        holder.tvDebut!!.setText(listComments.get(position).debut)
-        holder.tvFin!!.setText(listComments.get(position).fin)
+        holder.tvDescriptif!!.setText(listComments.get(position).description)
+        holder.tvDebut!!.setText(listComments.get(position).beginning)
+        holder.tvFin!!.setText(listComments.get(position).end)
 
 
 
