@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.design.widget.TextInputEditText
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.NotificationCompat
+import android.support.v4.app.NotificationManagerCompat
 import android.support.v7.app.AlertDialog
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
@@ -11,6 +13,8 @@ import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.dialog_schedule.*
 
+private var CHANNEL_ID="ma_CHANNEL_ID"
+private var notificationId=1
 class ScheduleDialogBox (): DialogFragment()
 {
     companion object {
@@ -52,6 +56,7 @@ class ScheduleDialogBox (): DialogFragment()
                 ) { dialog, id ->
 
                     sendBooking(roomID, bookingDate)
+                    sendNotification()
 
                 }
                 .setNegativeButton("NON"
@@ -95,6 +100,22 @@ class ScheduleDialogBox (): DialogFragment()
         catch (e:Exception)
         {
             Toast.makeText(activity, "There was an issue while booking the room: ", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    public fun sendNotification()
+    {
+        var builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.notification_icon_background)
+            .setContentTitle("My notification")
+            .setContentText("Much longer text that cannot fit one line...")
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .bigText("Much longer text that cannot fit one line..."))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        with(NotificationManagerCompat.from(requireContext())) {
+            // notificationId is a unique int for each notification that you must define
+            notify(notificationId, builder.build())
         }
     }
 
