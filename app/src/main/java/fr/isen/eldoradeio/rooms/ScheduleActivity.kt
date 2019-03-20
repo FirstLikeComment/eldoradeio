@@ -16,7 +16,7 @@ class ScheduleActivity : AppCompatActivity() {
         const val TAG = "ScheduleActivity"
     }
     private var listBooking: ArrayList<Reservation> = ArrayList()
-    private val adapter = CommentAdapter(this,listBooking)
+    private val adapter = ScheduleAdapter(this,listBooking)
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mBookingReference = mDatabase.getReference("booking")
     private var roomID = ""
