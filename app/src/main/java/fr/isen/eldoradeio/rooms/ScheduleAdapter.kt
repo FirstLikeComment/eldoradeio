@@ -75,10 +75,10 @@ class ScheduleAdapter(private val context: Context, private val listBookings: Ar
                 Log.w(TAG, "loadUser:onCancelled", databaseError.toException())
             }
         })
-        holder.tvUser!!.text = listBookings.get(position).userUid
-        holder.tvDescriptif!!.text = listBookings.get(position).description
-        holder.tvDebut!!.text = listBookings.get(position).beginning
-        holder.tvFin!!.text = listBookings.get(position).end
+        holder.tvUser!!.text = listBookings[position].userUid
+        holder.tvDescriptif!!.text = listBookings[position].description
+        holder.tvDebut!!.text = listBookings[position].beginning
+        holder.tvFin!!.text = listBookings[position].end
 
 
 
