@@ -15,4 +15,6 @@ data class Group(
     val groupName: String = "",
     val users: ArrayList<String>,
     var uuid: String = ""
-)
+) {
+    override fun toString(): String = groupName
+}

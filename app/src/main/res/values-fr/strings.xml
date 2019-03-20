@@ -31,9 +31,9 @@
     <string name="favorite_add_room">Ajouter une salle</string>
     <string name="group_you_belong_to">Vous appartenez aux groupes suivant :</string>
     <string name="group_text">Groupes :</string>
-    <string name="group_add_group">Ajouter un groupe</string>
+    <string name="group_join_group">Rejoindre un groupe</string>
     <string name="group_create_group">Créer un groupe</string>
     <string name="profile_group">Groupes</string>
     <string name="group_item_group_name">Nom du groupe</string>
-    <string name="group_item_remove">Retirer</string>
+    <string name="group_item_leave">Quitter</string>
 </resources>

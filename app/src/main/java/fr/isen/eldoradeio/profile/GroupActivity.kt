@@ -27,9 +27,10 @@ class GroupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_group)
 
         groupCreateGroupButton.setOnClickListener {
-            // update_processing.visibility = View.GONE
-            //changeNom()
             CreateGroupDialogBox().show(supportFragmentManager, "createGroup")
+        }
+        groupJoinGroupButton.setOnClickListener {
+            JoinGroupDialogBox().show(supportFragmentManager, "joinGroup")
         }
         mGroupReference.orderByKey().addValueEventListener(groupListener)
         groupRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -38,25 +39,23 @@ class GroupActivity : AppCompatActivity() {
 
     private val groupListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
+            Log.w("GroupActivity", "data has changed!")
             groupList.clear()
             if(dataSnapshot.childrenCount.toInt() != 0) {
                 for (item: DataSnapshot in dataSnapshot.children) {
                     if(item.hasChild("users")) {
                         val map = item.value as HashMap<String, Any>
                         val usersArrayList = arrayListOf<String>()
-                        val group = Group(map["groupName"] as String, usersArrayList, map["uuid"] as String)
                         val users = map["users"] as HashMap<String, String>
                         usersArrayList.addAll(ArrayList(users.keys))
+                        val group = Group(map["groupName"] as String, usersArrayList, map["uuid"] as String)
                         if(usersArrayList.contains(user!!.uid)) {
                             groupList.add(group)
-                            groupListAdapater.notifyDataSetChanged()
                         }
                     }
                 }
-                if (dataSnapshot.childrenCount.toInt() == 0) {
-                    groupListAdapater.notifyDataSetChanged()
-                }
             }
+            groupListAdapater.notifyDataSetChanged()
         }
         override fun onCancelled(databaseError: DatabaseError) {
             Log.w("GroupActivity", "loadItem:onCancelled", databaseError.toException())
