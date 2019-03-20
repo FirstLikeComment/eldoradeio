@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.view.View
 import fr.isen.eldoradeio.Room
 import com.google.firebase.database.*
 import fr.isen.eldoradeio.R
@@ -26,6 +27,8 @@ class BookingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         bookingButton.isEnabled = false
+        //this text should only be displayed once the date is chosen.
+        bookingAvailabilityStatusText.visibility = View.INVISIBLE
         selectedRoomID = intent.getStringExtra("roomID")!!
         val mSelectedRoomReference = mRoomReference.child(selectedRoomID)
 
@@ -83,6 +86,7 @@ class BookingActivity : AppCompatActivity() {
             }
             mSelectedRoomReservationReference.addValueEventListener(selectedRoomReservationListener)
             bookingButton.isEnabled = true
+            bookingAvailabilityStatusText.visibility = View.VISIBLE
         }
 
         bookingButton.setOnClickListener {
