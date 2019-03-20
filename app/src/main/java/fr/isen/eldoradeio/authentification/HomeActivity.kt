@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
 
 
         deconnexion.setOnClickListener {
-            deconnexion()
+            disconnection()
         }
 
     }
@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
         finish()
     }
 
-    public fun deconnexion() {
+    public fun disconnection() {
         FirebaseAuth.getInstance().signOut()
         afficheLogin()
     }
