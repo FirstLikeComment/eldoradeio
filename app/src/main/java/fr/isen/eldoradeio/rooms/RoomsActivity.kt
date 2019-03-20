@@ -45,16 +45,6 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         roomListRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         getRoomsFromFirebase()
 
-        val filterTypeAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, listOf(getString(R.string.room_filter_floor)))
-        filterTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        with(roomFilterTypeSpinner)
-        {
-            adapter = filterTypeAdapter
-            setSelection(0, false)
-            onItemSelectedListener = this@RoomsActivity
-            gravity = Gravity.CENTER
-        }
-
         val filterChoiceAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, floorList)
         filterChoiceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         with(roomFilterChoiceSpinner)

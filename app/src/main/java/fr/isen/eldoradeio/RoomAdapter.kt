@@ -34,20 +34,6 @@ class RoomAdapter (private val items : ArrayList<Room>, private val favorites : 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.roomName.text = items[position].roomName
-        when(items[position].availability) {
-            ROOM_FULLY_AVAILABLE -> {
-                holder.roomStatus.setColorFilter(ContextCompat.getColor(context,
-                    R.color.colorRoomAvailable))
-            }
-            ROOM_PARTIALLY_AVAILABLE -> {
-                holder.roomStatus.setColorFilter(ContextCompat.getColor(context,
-                    R.color.colorRoomPartiallyAvailable))
-            }
-            ROOM_UNAVAILABLE -> {
-                holder.roomStatus.setColorFilter(ContextCompat.getColor(context,
-                    R.color.colorRoomUnavailable))
-            }
-        }
         holder.bookingButton.setOnClickListener {
             val bookingIntent = Intent(context, BookingActivity::class.java)
             bookingIntent.putExtra("roomID",items[position].uuid)
@@ -95,7 +81,6 @@ class RoomAdapter (private val items : ArrayList<Room>, private val favorites : 
 class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     // Holds the TextViews and the imageView that constitute a random user
     val roomName: TextView = view.groupItemGroupNameText
-    val roomStatus: ImageView = view.roomItemStatus
     val bookingButton: Button = view.groupItemRemoveButton
     val itemFavourite: ImageView = view.roomItemFavourite
 }

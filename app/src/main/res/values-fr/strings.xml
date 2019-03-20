@@ -15,7 +15,7 @@
     <string name="toast_spinner_register">"Cliqué : "</string>
     <string name="date_format">%04d-%02d-%02d</string>
     <string name="room_filter_type">Filtrer par :</string>
-    <string name="room_filter_choice">Filtre :</string>
+    <string name="room_filter_choice">Étage :</string>
     <string name="room_list">Salles :</string>
     <string name="room_item_room_name">Nom de salle</string>
     <string name="room_item_book">Réserver</string>
