@@ -162,6 +162,7 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             if (requestCode == REQUEST_SELECT_IMAGE_IN_ALBUM && data != null && data.data != null) {
                 data.let {
                     filePath = it.data
+                    Toast.makeText(this, "$filePath", Toast.LENGTH_LONG).show()
                     if (filePath != null) {
                         val stream = contentResolver.openInputStream(filePath!!)
                         val bitmap = BitmapFactory.decodeStream(stream)
@@ -170,12 +171,23 @@ class RegisterActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
                 }
             }
         }
-        if (requestCode == REQUEST_TAKE_PHOTO && data != null && data.data != null) {
+        /*if (requestCode == REQUEST_TAKE_PHOTO && data != null && data.data != null) {
             data.let {
                 filePath = it.data
                 val imageBitmap = data.extras?.get("data") as Bitmap
+                filePath = Uri.parse(MediaStore.Images.Media.insertImage(contentResolver, imageBitmap, "Title", null))
+                Toast.makeText(this, "$filePath", Toast.LENGTH_LONG).show()
                 circularProfilePicture.setImageBitmap(imageBitmap)
             }
+        } else {
+            Toast.makeText(this, "$filePath", Toast.LENGTH_LONG).show()
+        }*/
+        if (requestCode == REQUEST_TAKE_PHOTO && data != null && data.extras != null) {
+            val imageBitmap = data.extras?.get("data") as Bitmap
+            filePath = Uri.parse(MediaStore.Images.Media.insertImage(contentResolver, imageBitmap, "Title", null))
+            circularProfilePict.setImageBitmap(imageBitmap)
+        } else {
+            Toast.makeText(this, "$filePath", Toast.LENGTH_LONG).show()
         }
     }
 
