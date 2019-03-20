@@ -20,9 +20,10 @@
             app:layout_constraintTop_toTopOf="@+id/groupItemGroupNameText"
             app:layout_constraintBottom_toBottomOf="@+id/groupItemGroupNameText"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="16dp" android:layout_marginRight="16dp"/>
+            android:layout_marginEnd="16dp" android:layout_marginRight="16dp" android:background="@color/colorAccent"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"/>
     <View
-            android:id="@+id/divider"
+            android:id="@+id/groupItemRowDivider"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider"

@@ -7,9 +7,9 @@
         android:layout_height="match_parent"
         tools:context=".authentification.RegisterActivity">
     <View
-            android:id="@+id/profileDivider2"
+            android:id="@+id/registerDivider"
             android:layout_width="0dp"
-            android:layout_height="5dp"
+            android:layout_height="15dp"
             android:background="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="64dp"
@@ -27,16 +27,16 @@
             app:civ_shadow="true" app:civ_border="true"
             app:layout_constraintStart_toStartOf="@+id/emailFieldLayoutRegister"
             app:layout_constraintEnd_toEndOf="@+id/emailFieldLayoutRegister"
-            app:layout_constraintBottom_toBottomOf="@+id/profileDivider2"
-            app:layout_constraintTop_toTopOf="@+id/profileDivider2"/>
+            app:layout_constraintBottom_toBottomOf="@+id/registerDivider"
+            app:layout_constraintTop_toTopOf="@+id/registerDivider"/>
     <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_camera"
-            android:id="@+id/imageView2"
+            android:id="@+id/registerImageView"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="160dp"
             android:layout_marginRight="160dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp" android:layout_marginTop="24dp"
-            app:layout_constraintTop_toTopOf="@+id/profileDivider2" app:layout_constraintHorizontal_bias="1.0"/>
+            app:layout_constraintTop_toTopOf="@+id/registerDivider" app:layout_constraintHorizontal_bias="1.0"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="128dp" android:layout_marginStart="128dp"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/profileDivider2" android:layout_marginTop="32dp">
+            app:layout_constraintTop_toBottomOf="@+id/registerDivider" android:layout_marginTop="32dp">
 
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/year_spinner" app:layout_constraintStart_toEndOf="@+id/yearFieldRegister"
             android:layout_marginLeft="16dp" android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="156dp" android:layout_marginRight="156dp"
+            android:layout_marginEnd="152dp" android:layout_marginRight="152dp"
             app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/dobFieldLayoutRegister" android:spinnerMode="dropdown"
     />

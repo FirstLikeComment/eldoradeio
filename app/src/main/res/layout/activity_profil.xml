@@ -7,61 +7,29 @@
         android:layout_height="match_parent"
         tools:context=".profile.ProfileActivity">
 
-    <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp" tools:srcCompat="@mipmap/logodorade"
-            android:id="@+id/profil_picture"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:visibility="visible" app:layout_constraintTop_toBottomOf="@+id/change_image"
-            android:layout_marginTop="8dp"/>
-    <ImageView
-            android:layout_width="35dp"
-            android:layout_height="32dp" app:srcCompat="@android:drawable/checkbox_on_background"
-            android:id="@+id/update_successful" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/profil_picture" tools:visibility="gone"
-            android:visibility="gone"/>
-    <Button
-            android:text="Save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/save" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.498" android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/update_successful"/>
-    <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_edit"
-            android:id="@+id/change_image"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.058"
-            app:layout_constraintTop_toBottomOf="@+id/dobProfile"/>
+    <View
+            android:id="@+id/dividerProfile"
+            android:layout_width="0dp"
+            android:layout_height="633dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="256dp" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.513"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/firstnameProfile" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"/>
-    <Button
-            android:text="@string/profile_favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/profileFavoriteButton" android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/save" app:layout_constraintStart_toStartOf="@+id/save"
-            app:layout_constraintEnd_toEndOf="@+id/save"/>
+            android:id="@+id/firstnameProfile"
+            android:textSize="18sp" android:textColor="@color/common_google_signin_btn_text_dark_default"
+            app:layout_constraintStart_toStartOf="@+id/circularProfile"
+            app:layout_constraintEnd_toEndOf="@+id/circularProfile" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/circularProfile"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/lastnameProfile"
+            android:textSize="18sp" android:textColor="@color/common_google_signin_btn_text_dark_default"
             app:layout_constraintStart_toStartOf="@+id/firstnameProfile"
             app:layout_constraintEnd_toEndOf="@+id/firstnameProfile" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/firstnameProfile"/>
@@ -69,22 +37,72 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/dobProfile"
+            android:textSize="18sp" android:textColor="@color/common_google_signin_btn_text_dark_default"
             app:layout_constraintStart_toStartOf="@+id/lastnameProfile"
             app:layout_constraintEnd_toEndOf="@+id/lastnameProfile" android:layout_marginTop="8dp"
             app:layout_constraintTop_toBottomOf="@+id/lastnameProfile"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/yearProfile" app:layout_constraintStart_toStartOf="@+id/dobProfile"
-            app:layout_constraintEnd_toEndOf="@+id/dobProfile" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/dobProfile"/>
+            android:id="@+id/yearProfile"
+            android:textSize="18sp" android:textColor="@color/common_google_signin_btn_text_dark_default"
+            app:layout_constraintStart_toStartOf="@+id/profileModifier"
+            app:layout_constraintEnd_toEndOf="@+id/profileModifier"
+            app:layout_constraintTop_toBottomOf="@+id/dobProfile" android:layout_marginTop="8dp"
+    />
+    <Button
+            android:text="@string/profile_bSave"
+            android:id="@+id/profileModifier"
+            app:layout_constraintTop_toBottomOf="@+id/yearProfile"
+            app:layout_constraintStart_toStartOf="@+id/dobProfile"
+            app:layout_constraintEnd_toEndOf="@+id/dobProfile"
+            style="@style/ClassicButtonDorade"
+            android:background="@color/common_google_signin_btn_text_dark_default" android:padding="8dp"/>
+    <Button
+            android:text="@string/profile_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profileFavoriteButton"
+            app:layout_constraintStart_toStartOf="@+id/profileModifier"
+            app:layout_constraintEnd_toEndOf="@+id/profileModifier"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/profileModifier"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            style="@style/ClassicButtonDorade"
+            android:background="@color/common_google_signin_btn_text_dark_default" android:padding="8dp"/>
     <Button
             android:text="@string/profile_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/profileGroupsButton"
             app:layout_constraintStart_toStartOf="@+id/profileFavoriteButton"
-            app:layout_constraintEnd_toEndOf="@+id/profileFavoriteButton" android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/profileFavoriteButton"/>
+            app:layout_constraintEnd_toEndOf="@+id/profileFavoriteButton" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/profileFavoriteButton"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            style="@style/ClassicButtonDorade"
+            android:background="@color/common_google_signin_btn_text_dark_default"/>
+    <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/doraderose"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="4dp"
+            app:civ_shadow_radius="5"
+            app:civ_shadow_color="@color/common_google_signin_btn_text_light_focused"
+            android:id="@+id/circularProfile"
+            android:scaleType="centerInside"
+            app:civ_shadow="true" app:civ_border="true"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginTop="40dp" app:layout_constraintTop_toTopOf="parent"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@android:drawable/ic_menu_camera"
+            android:id="@+id/profileImageView"
+            android:layout_marginTop="104dp"
+            app:layout_constraintTop_toTopOf="@+id/dividerProfile" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.73"/>
 
 </android.support.constraint.ConstraintLayout>

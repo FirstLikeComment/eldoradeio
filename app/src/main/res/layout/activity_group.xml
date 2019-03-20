@@ -31,14 +31,18 @@
             android:layout_height="wrap_content"
             android:id="@+id/groupJoinGroupButton" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/groupCreateGroupButton"/>
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/groupCreateGroupButton"
+            android:background="@color/colorAccent"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" android:padding="8dp"/>
     <Button
             android:text="@string/group_create_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/groupCreateGroupButton" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/colorAccent"
+            android:textColor="@color/common_google_signin_btn_text_dark_default" android:padding="8dp"/>
     <TextView
             android:text="@string/group_you_belong_to"
             android:layout_width="wrap_content"

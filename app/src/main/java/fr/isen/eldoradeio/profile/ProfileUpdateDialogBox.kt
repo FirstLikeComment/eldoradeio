@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import fr.isen.eldoradeio.R
 import kotlinx.android.synthetic.main.dialog_update.*
 
-class CustomizedDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
+class ProfileUpdateDialogBox : DialogFragment(), AdapterView.OnItemSelectedListener
 {
     lateinit var firstName: TextInputEditText
     lateinit var lastName: TextInputEditText

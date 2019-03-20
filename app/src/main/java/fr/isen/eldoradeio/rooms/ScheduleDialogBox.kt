@@ -40,9 +40,9 @@ class ScheduleDialogBox (): DialogFragment()
         return activity?.let {
             val builder = AlertDialog.Builder(it)
             val dialogView = requireActivity().layoutInflater.inflate(R.layout.dialog_schedule, null)
-            description = dialogView.findViewById(R.id.descriptifField)
-            beginning = dialogView.findViewById(R.id.debutField)
-            end = dialogView.findViewById(R.id.finField)
+            description = dialogView.findViewById(R.id.descField)
+            beginning = dialogView.findViewById(R.id.startField)
+            end = dialogView.findViewById(R.id.finishField)
             val roomID = arguments?.getString("roomID")!!
             val bookingDate = arguments?.getString("bookingDate")!!
 

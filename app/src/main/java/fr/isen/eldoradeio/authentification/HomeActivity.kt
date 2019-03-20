@@ -3,10 +3,15 @@ package fr.isen.eldoradeio.authentification
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.ImageView
+import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.mikhaellopez.circularimageview.CircularImageView
 import com.squareup.picasso.Picasso
 import fr.isen.eldoradeio.R
 import fr.isen.eldoradeio.profile.ProfileActivity
@@ -14,9 +19,11 @@ import fr.isen.eldoradeio.rooms.RoomsActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
+    companion object {
+        const val TAG = "HomeActivity"
+    }
 
     val user = FirebaseAuth.getInstance().currentUser
-    var str: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,16 +32,16 @@ class HomeActivity : AppCompatActivity() {
         changeTitle()
         downloadPicture()
 
-        profile.setOnClickListener {
-            displayProfile()
+        homeProfile.setOnClickListener {
+            redirectToProfile()
         }
 
-        recherche.setOnClickListener {
-            displayRooms()
+        homeSearch.setOnClickListener {
+            redirectToRooms()
         }
 
 
-        deconnexion.setOnClickListener {
+        homeDisconnection.setOnClickListener {
             disconnection()
         }
 
@@ -47,7 +54,7 @@ class HomeActivity : AppCompatActivity() {
         val pathReference = storageReference.child(user!!.uid + "/profilePicture")
 
         pathReference.downloadUrl.addOnSuccessListener {
-            val imageView = findViewById<ImageView>(R.id.circularProfilePicture)
+            val imageView = findViewById<CircularImageView>(R.id.circularProfile)
             Picasso.get()
                 .load(it)
                 .placeholder(R.drawable.doradegrise)
@@ -58,30 +65,44 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    public fun changeTitle() {
-        user?.let {
-            str = getString(R.string.welcome_home) + user.email.toString()
-            bienvenue.text = str
+    private fun changeTitle() {
+        val mDatabase = FirebaseDatabase.getInstance()
+        val userId = user!!.uid
+        val mReference = mDatabase.getReference("users/$userId/firstName")
+        user.let {
+            mReference.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    val value = dataSnapshot.getValue(String::class.java)
+                    val str:String = getString(R.string.welcome_home)+value.toString()
+                    homeWelcome.text = str
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    // Failed to read value
+                    Log.w(TAG, "Failed to read value.", error.toException())
+                }
+            })
         }
     }
 
-    public fun displayProfile() {
+    private fun redirectToProfile() {
         startActivity(Intent(this, ProfileActivity::class.java))
         finish()
     }
 
-    public fun displayRooms() {
+    private fun redirectToRooms() {
         startActivity(Intent(this, RoomsActivity::class.java))
         finish()
     }
 
-    public fun displayLogin() {
+    private fun redirectToLogin() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 
-    public fun disconnection() {
+    private fun disconnection() {
         FirebaseAuth.getInstance().signOut()
-        displayLogin()
+        redirectToLogin()
     }
 }

@@ -30,5 +30,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/favoriteAddRoomButton" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@color/colorAccent" android:padding="8dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"/>
 </android.support.constraint.ConstraintLayout>

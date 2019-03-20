@@ -48,5 +48,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/bookingButton" android:layout_marginTop="44dp"
             app:layout_constraintTop_toBottomOf="@+id/bookingCalendarView" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/colorAccent" android:padding="8dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"/>
 </android.support.constraint.ConstraintLayout>

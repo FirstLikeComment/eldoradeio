@@ -9,7 +9,7 @@
             android:layout_height="64dp"
             android:scaleType="center"
             android:background="#FFFFBB33"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name" android:id="@+id/dialogScheduleImageView"/>
 
     <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/firstname_update" android:id="@+id/descriptifField" android:singleLine="true"
+                android:hint="@string/firstname_update" android:id="@+id/descField" android:singleLine="true"
                 android:selectAllOnFocus="true"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -27,7 +27,8 @@
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/firstname_update" android:id="@+id/debutField" android:singleLine="true"
+                android:hint="@string/dialogue_schedule_start_time" android:id="@+id/startField"
+                android:singleLine="true"
                 android:selectAllOnFocus="true" android:layout_weight="1" android:inputType="time"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
@@ -36,7 +37,8 @@
         <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/firstname_update" android:id="@+id/finField" android:singleLine="true"
+                android:hint="@string/dialog_schedule_finish_time" android:id="@+id/finishField"
+                android:singleLine="true"
                 android:selectAllOnFocus="true" android:layout_weight="1" android:inputType="time"/>
     </android.support.design.widget.TextInputLayout>
 

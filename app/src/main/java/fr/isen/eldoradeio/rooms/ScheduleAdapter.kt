@@ -11,9 +11,10 @@ import fr.isen.eldoradeio.R
 import fr.isen.eldoradeio.Reservation
 
 
-class CommentAdapter(private val context: Context,private val listComments: ArrayList<Reservation>) : BaseAdapter() {
+class CommentAdapter(private val context: Context, private val listComments: ArrayList<Reservation>) : BaseAdapter() {
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mCommentReference = mDatabase.getReference("booking")
+    private val mReference = mDatabase.getReference("users")
 
 
 
@@ -46,13 +47,13 @@ class CommentAdapter(private val context: Context,private val listComments: Arra
             holder = ViewHolder()
             val inflater = context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = inflater.inflate(R.layout.lv_item, null, true)
+            convertView = inflater.inflate(R.layout.schedule_item, null, true)
 
 
-            holder.tvUser = convertView!!.findViewById(R.id.user) as TextView
-            holder.tvDescriptif = convertView.findViewById(R.id.descriptif) as TextView
-            holder.tvDebut = convertView.findViewById(R.id.debut) as TextView
-            holder.tvFin = convertView.findViewById(R.id.fin) as TextView
+            holder.tvUser = convertView!!.findViewById(R.id.userField) as TextView
+            holder.tvDescriptif = convertView.findViewById(R.id.descField) as TextView
+            holder.tvDebut = convertView.findViewById(R.id.startField) as TextView
+            holder.tvFin = convertView.findViewById(R.id.finishField) as TextView
 
             convertView.tag = holder
         } else {
@@ -60,10 +61,10 @@ class CommentAdapter(private val context: Context,private val listComments: Arra
             holder = convertView.tag as ViewHolder
         }
 
-        holder.tvUser!!.setText(listComments.get(position).userUid)
-        holder.tvDescriptif!!.setText(listComments.get(position).description)
-        holder.tvDebut!!.setText(listComments.get(position).beginning)
-        holder.tvFin!!.setText(listComments.get(position).end)
+        holder.tvUser!!.text = listComments.get(position).userUid
+        holder.tvDescriptif!!.text = listComments.get(position).description
+        holder.tvDebut!!.text = listComments.get(position).beginning
+        holder.tvFin!!.text = listComments.get(position).end
 
 
 
