@@ -18,10 +18,11 @@
             android:text="PROFILE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/profile" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/bienvenue" app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/profile"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"/>
+            android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/circularProfilePicture"/>
     <Button
             android:text="RECHERCHE"
             android:layout_width="wrap_content"
@@ -38,4 +39,28 @@
             app:layout_constraintTop_toBottomOf="@+id/recherche" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp" android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" android:layout_marginRight="8dp"/>
+    <View
+            android:id="@+id/profileDivider"
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="80dp"
+            app:layout_constraintTop_toBottomOf="@+id/bienvenue"/>
+    <com.mikhaellopez.circularimageview.CircularImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/doraderose"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="4dp"
+            app:civ_shadow_radius="5"
+            app:civ_shadow_color="@color/common_google_signin_btn_text_light_focused"
+            android:id="@+id/circularProfilePicture"
+            app:layout_constraintTop_toTopOf="@+id/profileDivider"
+            app:layout_constraintBottom_toBottomOf="@+id/profileDivider"
+            app:layout_constraintStart_toStartOf="@+id/profileDivider"
+            app:layout_constraintEnd_toEndOf="@+id/profileDivider" android:scaleType="centerInside"
+            app:civ_shadow="true" app:civ_border="true"/>
+
 </android.support.constraint.ConstraintLayout>
