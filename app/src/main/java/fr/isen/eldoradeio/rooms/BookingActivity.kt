@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -29,6 +30,9 @@ class BookingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
         bookingButton.isEnabled = false
+        //hiding room availability status until it's relevant
+        bookingAvailabilityStatusText.visibility = View.INVISIBLE
+        bookingAvailabilityStatusImageView.visibility = View.INVISIBLE
         selectedRoomID = intent.getStringExtra("roomID")!!
         val mSelectedRoomReference = mRoomReference.child(selectedRoomID)
 
@@ -106,6 +110,8 @@ class BookingActivity : AppCompatActivity() {
             }
             mSelectedRoomReservationReference.addValueEventListener(selectedRoomReservationListener)
             bookingButton.isEnabled = true
+            bookingAvailabilityStatusText.visibility = View.VISIBLE
+            bookingAvailabilityStatusImageView.visibility = View.VISIBLE
         }
 
         bookingButton.setOnClickListener {
