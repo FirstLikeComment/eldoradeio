@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import fr.isen.eldoradeio.R
 import fr.isen.eldoradeio.authentification.RegisterActivity
-import fr.isen.eldoradeio.profile.ScheduleDialogBox
+import fr.isen.eldoradeio.rooms.ScheduleDialogBox
 import kotlinx.android.synthetic.main.activity_schedule.*
 
 data class Reservation(
@@ -22,28 +22,33 @@ data class Reservation(
     val fin: String = "",
     val roomUid: String = "",
     var descriptif: String = "",
+    var bookingDate: String ="",
     var uuid: String = ""
 )
 
 class ScheduleActivity : AppCompatActivity() {
-    var listComments: ArrayList<Reservation> = ArrayList()
-    private val adapter = CommentAdapter(this,listComments)
+    var listBooking: ArrayList<Reservation> = ArrayList()
+    private val adapter = CommentAdapter(this,listBooking)
     private val mDatabase = FirebaseDatabase.getInstance()
-    private val mCommentReference = mDatabase.getReference("booking")
+    private val mBookingReference = mDatabase.getReference("booking")
+    private var roomID = ""
+    private var bookingDate = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule)
-        getCommentsFromFirebase()
+        getBookingsFromFirebase()
+        roomID = intent.getStringExtra("roomID")
+        bookingDate = intent.getStringExtra("bookingDate")
         commentListView.adapter = adapter
 
         nv_creneau.setOnClickListener{
-            addCreneau()
+            addToSchedule()
         }
     }
 
-    public fun getCommentsFromFirebase()
+    public fun getBookingsFromFirebase()
     {
-        mCommentReference.orderByKey().addValueEventListener(itemListener)
+        mBookingReference.orderByKey().addValueEventListener(itemListener)
     }
 
     var itemListener: ValueEventListener = object : ValueEventListener {
@@ -53,13 +58,13 @@ class ScheduleActivity : AppCompatActivity() {
         }
         override fun onCancelled(databaseError: DatabaseError) {
             // Getting Item failed, log a message
-            Log.w("ReadComment", "loadItem:onCancelled", databaseError.toException())
+            Log.w("ReadBooking", "loadItem:onCancelled", databaseError.toException())
         }
     }
 
     private fun addDataToList(dataSnapshot: DataSnapshot) {
         val items = dataSnapshot.children.iterator()
-        listComments.clear()
+        listBooking.clear()
         //Check if current database contains any collection
         if (items.hasNext()) {
 
@@ -70,15 +75,37 @@ class ScheduleActivity : AppCompatActivity() {
                 //get current data in a map
                 val map = currentItem.value as HashMap<String, Any>
                 //key will return Firebase ID
-                val comment = Reservation(map.get("userUid") as String, map.get("debut") as String, map.get("fin") as String, map.get("roomUid") as String,map.get("descriptif") as String,map.get("uuid") as String)
-                listComments.add(comment)
+                if(
+                    currentItem.hasChild("userUid")&&
+                    currentItem.hasChild("beginning")&&
+                    currentItem.hasChild("end")&&
+                    currentItem.hasChild("roomUid")&&
+                    currentItem.hasChild("description")&&
+                    currentItem.hasChild("bookingDate")&&
+                    currentItem.hasChild("uuid")
+                        ) {
+
+                    val booking = Reservation(
+                        map["userUid"] as String,
+                        map["beginning"] as String,
+                        map["end"] as String,
+                        map["roomUid"] as String,
+                        map["description"] as String,
+                        map["bookingDate"] as String,
+                        map["uuid"] as String
+                    )
+                    if(booking.bookingDate == bookingDate && booking.roomUid == roomID) {
+                        listBooking.add(booking)
+                    }
+                }
             }
         }
         adapter.notifyDataSetChanged()
     }
 
-    private fun addCreneau()
+    private fun addToSchedule()
     {
-        ScheduleDialogBox().show(supportFragmentManager, "coucou")
+        val dialogBox = ScheduleDialogBox.newInstance(roomID,bookingDate)
+        dialogBox.show(supportFragmentManager, "addToSchedule")
     }
 }
