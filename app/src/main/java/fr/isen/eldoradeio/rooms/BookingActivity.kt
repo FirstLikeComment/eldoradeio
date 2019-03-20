@@ -78,7 +78,7 @@ class BookingActivity : AppCompatActivity() {
                 }
                 override fun onCancelled(databaseError: DatabaseError) {
                     // Getting Item failed, log a message
-                    Log.w("ReadBooking", "loadItem:onCancelled", databaseError.toException())
+                    Log.w("ReadBooking", "loadBooking:onCancelled", databaseError.toException())
                 }
             }
             mSelectedRoomReservationReference.addValueEventListener(selectedRoomReservationListener)

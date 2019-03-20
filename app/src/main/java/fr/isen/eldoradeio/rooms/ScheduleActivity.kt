@@ -12,6 +12,9 @@ import fr.isen.eldoradeio.Reservation
 import kotlinx.android.synthetic.main.activity_schedule.*
 
 class ScheduleActivity : AppCompatActivity() {
+    companion object {
+        const val TAG = "ScheduleActivity"
+    }
     var listBooking: ArrayList<Reservation> = ArrayList()
     private val adapter = CommentAdapter(this,listBooking)
     private val mDatabase = FirebaseDatabase.getInstance()
@@ -33,17 +36,17 @@ class ScheduleActivity : AppCompatActivity() {
 
     public fun getBookingsFromFirebase()
     {
-        mBookingReference.orderByKey().addValueEventListener(itemListener)
+        mBookingReference.orderByKey().addValueEventListener(bookingListener)
     }
 
-    var itemListener: ValueEventListener = object : ValueEventListener {
+    var bookingListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             // Get Post object and use the values to update the UI
             addDataToList(dataSnapshot)
         }
         override fun onCancelled(databaseError: DatabaseError) {
             // Getting Item failed, log a message
-            Log.w("ReadBooking", "loadItem:onCancelled", databaseError.toException())
+            Log.w(TAG, "loadBooking:onCancelled", databaseError.toException())
         }
     }
 

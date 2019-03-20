@@ -59,7 +59,7 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     }
 
     private fun getRoomsFromFirebase() {
-        mRoomReference.orderByKey().addValueEventListener(itemListener)
+        mRoomReference.orderByKey().addValueEventListener(roomListener)
         mFavoriteReference.orderByKey().addValueEventListener(favoriteListener)
     }
 
@@ -92,13 +92,13 @@ class RoomsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
     }
 
-    private val itemListener: ValueEventListener = object : ValueEventListener {
+    private val roomListener: ValueEventListener = object : ValueEventListener {
         override fun onDataChange(dataSnapshot: DataSnapshot) {
             updateRoomList(dataSnapshot)
             Toast.makeText(this@RoomsActivity,getString(R.string.toast_room_list_changed),Toast.LENGTH_SHORT).show()
         }
         override fun onCancelled(databaseError: DatabaseError) {
-            Log.w(TAG, "loadItem:onCancelled", databaseError.toException())
+            Log.w(TAG, "loadRoom:onCancelled", databaseError.toException())
         }
     }
 
